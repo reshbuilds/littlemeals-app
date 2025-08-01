@@ -15,7 +15,7 @@ import { colors } from '../../constants/colors';
 import { spacing } from '../../constants/spacing';
 import { textStyles, responsiveTextStyles } from '../../constants/typography';
 
-const StyledSafeAreaView = styled(SafaAreaView);
+const StyledSafeAreaView = styled(SafeAreaView);
 const StyledScrollView = styled(ScrollView);
 const StyledView = styled(View);
 const StyledText = styled(Text);
