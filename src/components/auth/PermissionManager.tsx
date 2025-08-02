@@ -9,7 +9,6 @@ import {
 import { styled } from 'nativewind';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
-import { textStyles } from '../../constants/typography';
 
 const StyledView = styled(View);
 const StyledText = styled(Text);
@@ -224,7 +223,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
         </StyledText>
         <StyledText
           style={{
-            ...textStyles.caption,
+            fontSize: 12,
             color: config.color,
             fontWeight: '600',
           }}
@@ -289,7 +288,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
             >
               <StyledText
                 style={{
-                  ...textStyles.h4,
+                  fontSize: 18, fontWeight: '600',
                   color: colors.foreground.DEFAULT,
                   marginRight: spacing[2],
                 }}
@@ -301,7 +300,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
             </StyledView>
             <StyledText
               style={{
-                ...textStyles.body,
+                fontSize: 16,
                 color: colors.foreground.muted,
               }}
             >
@@ -310,7 +309,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
             {member.joinedAt && (
               <StyledText
                 style={{
-                  ...textStyles.caption,
+                  fontSize: 12,
                   color: colors.foreground.light,
                   marginTop: spacing[1],
                 }}
@@ -326,7 +325,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
           <StyledView>
             <StyledText
               style={{
-                ...textStyles.label,
+                fontSize: 14, fontWeight: '500',
                 color: colors.foreground.muted,
                 marginBottom: spacing[2],
               }}
@@ -369,7 +368,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
                   </StyledText>
                   <StyledText
                     style={{
-                      ...textStyles.caption,
+                      fontSize: 12,
                       color: member.role === role 
                         ? roleDefinitions[role].color 
                         : colors.foreground.muted,
@@ -395,7 +394,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
             >
               <StyledText
                 style={{
-                  ...textStyles.caption,
+                  fontSize: 12,
                   color: colors.error.DEFAULT,
                 }}
               >
@@ -418,7 +417,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
           >
             <StyledText
               style={{
-                ...textStyles.caption,
+                fontSize: 12,
                 color: colors.foreground.muted,
               }}
             >
@@ -464,7 +463,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
             <StyledView style={{ flex: 1 }}>
               <StyledText
                 style={{
-                  ...textStyles.h4,
+                  fontSize: 18, fontWeight: '600',
                   color: colors.foreground.DEFAULT,
                   marginBottom: spacing[1],
                 }}
@@ -473,7 +472,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               </StyledText>
               <StyledText
                 style={{
-                  ...textStyles.body,
+                  fontSize: 16,
                   color: colors.foreground.muted,
                 }}
               >
@@ -503,7 +502,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
           >
             <StyledText
               style={{
-                ...textStyles.label,
+                fontSize: 14, fontWeight: '500',
                 color: colors.foreground.muted,
                 marginBottom: spacing[2],
                 marginTop: spacing[2],
@@ -531,7 +530,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
                 </StyledText>
                 <StyledText
                   style={{
-                    ...textStyles.body,
+                    fontSize: 16,
                     color: colors.foreground.DEFAULT,
                   }}
                 >
@@ -558,7 +557,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
         <StyledView style={{ marginBottom: spacing[6] }}>
           <StyledText
             style={{
-              ...textStyles.h2,
+              fontSize: 24, fontWeight: 'bold',
               color: colors.foreground.DEFAULT,
               marginBottom: spacing[2],
               textAlign: 'center',
@@ -568,7 +567,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
           </StyledText>
           <StyledText
             style={{
-              ...textStyles.body,
+              fontSize: 16,
               color: colors.foreground.muted,
               textAlign: 'center',
             }}
@@ -581,7 +580,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
         <StyledView style={{ marginBottom: spacing[6] }}>
           <StyledText
             style={{
-              ...textStyles.h3,
+              fontSize: 20, fontWeight: '600',
               color: colors.foreground.DEFAULT,
               marginBottom: spacing[4],
             }}
@@ -595,7 +594,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
         <StyledView>
           <StyledText
             style={{
-              ...textStyles.h3,
+              fontSize: 20, fontWeight: '600',
               color: colors.foreground.DEFAULT,
               marginBottom: spacing[4],
             }}
@@ -617,7 +616,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
           >
             <StyledText
               style={{
-                ...textStyles.body,
+                fontSize: 16,
                 color: colors.foreground.muted,
                 textAlign: 'center',
               }}
