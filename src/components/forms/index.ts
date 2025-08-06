@@ -1,14 +1,36 @@
 /**
  * LittleMeals Form Components
  * 
- * Specialized form components for meal logging and family management
+ * Specialized form components optimized for fast meal logging with:
+ * - Sub-5-second logging capability
+ * - Smart defaults and auto-focus
+ * - Family-friendly touch targets
+ * - Scandinavian minimal design
+ * - Comprehensive TypeScript interfaces
  */
 
-export { MealLoggingForm, type MealData, type ChildResponse, type Child } from './MealLoggingForm';
-export { VoiceInput } from './VoiceInput';
+export { 
+  MealLoggingForm, 
+  type MealData, 
+  type ChildResponse, 
+  type Child 
+} from './MealLoggingForm';
 
-// Future form components to be added:
-// export { FoodAutocomplete } from './FoodAutocomplete';
-// export { DatePicker } from './DatePicker';
-// export { MealTypeSelector } from './MealTypeSelector';
-// export { ChildResponseGrid } from './ChildResponseGrid';
+export { 
+  FoodAutocomplete,
+  type FoodItem,
+  type FoodAutocompleteProps
+} from './FoodAutocomplete';
+
+export { 
+  DatePicker,
+  type DatePickerProps
+} from './DatePicker';
+
+export { 
+  ChildResponseGrid,
+  type ChildResponseGridProps,
+  type ResponseType
+} from './ChildResponseGrid';
+
+export { VoiceInput } from './VoiceInput';

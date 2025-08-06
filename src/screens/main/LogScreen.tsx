@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Alert, TextInput, Platform, Modal, KeyboardAvoidingView } from 'react-native';
 import { styled } from 'nativewind';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { FoodAutocomplete } from '../../components/forms/FoodAutocomplete';
 
 // Mock data for demonstration
 const mockChildren = [
@@ -206,14 +207,12 @@ const LogScreen = () => {
             </StyledView>
           </StyledView>
 
-          {/* Food Input - Minimal */}
-          <StyledView className="mb-8">
-            <StyledTextInput
+          {/* Food Input - With Autocomplete */}
+          <StyledView className="mb-8" style={{ zIndex: 1000 }}>
+            <FoodAutocomplete
               placeholder="Enter food"
               value={foodName}
               onChangeText={setFoodName}
-              className="bg-background-card border border-border rounded-xl px-6 py-4 text-lg text-foreground"
-              placeholderTextColor="hsl(160, 6%, 50%)"
             />
           </StyledView>
 
