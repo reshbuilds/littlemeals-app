@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
   SafeAreaView,
   StatusBar,
   Alert,
+  Dimensions,
 } from 'react-native';
 import { styled } from 'nativewind';
 import { OnboardingStep } from '../../components/auth/OnboardingStep';
@@ -56,6 +57,21 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
   const [currentStep, setCurrentStep] = useState<OnboardingStepType>('welcome');
   const [loading, setLoading] = useState(false);
   const [selectedResponses, setSelectedResponses] = useState<Record<string, 'eaten' | 'partial' | 'refused'>>({});
+  const [screenData, setScreenData] = useState(Dimensions.get('screen'));
+  
+  // Track orientation changes
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener(
+      'change',
+      ({ screen }) => {
+        setScreenData(screen);
+      }
+    );
+    
+    return () => subscription?.remove();
+  }, []);
+  
+  const isLandscape = screenData.width > screenData.height;
 
   const steps: OnboardingStepType[] = ['welcome', 'meal_logging', 'family_sync', 'ai_insights', 'ready'];
   const currentStepIndex = steps.indexOf(currentStep);
@@ -187,6 +203,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
             stepNumber={1}
             totalSteps={5}
             loading={loading}
+            isLandscape={isLandscape}
           />
         );
 
@@ -206,6 +223,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
             totalSteps={5}
             loading={loading}
             demoContent={<MealLoggingDemo />}
+            isLandscape={isLandscape}
           />
         );
 
@@ -224,6 +242,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
             stepNumber={3}
             totalSteps={5}
             loading={loading}
+            isLandscape={isLandscape}
           />
         );
 
@@ -242,6 +261,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
             stepNumber={4}
             totalSteps={5}
             loading={loading}
+            isLandscape={isLandscape}
           />
         );
 
@@ -258,6 +278,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
             stepNumber={5}
             totalSteps={5}
             loading={loading}
+            isLandscape={isLandscape}
           />
         );
 

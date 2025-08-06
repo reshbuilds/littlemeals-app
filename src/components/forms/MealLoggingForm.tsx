@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import { View, Text, TouchableOpacity, Alert, TextInput } from 'react-native';
 import { styled } from 'nativewind';
 import { 
   VStack, 
@@ -13,6 +13,8 @@ import {
   PrimaryButton,
   colors
 } from '@/components/design-system';
+import { FoodAutocomplete } from './FoodAutocomplete';
+import { DatePicker } from './DatePicker';
 
 export interface MealData {
   foodName: string;
@@ -38,32 +40,71 @@ interface MealLoggingFormProps {
   onSave: (mealData: MealData) => void;
   onReset?: () => void;
   initialData?: Partial<MealData>;
+  lastMealType?: string;
+  foodHistory?: any[];
 }
 
 const mealTypes = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
+
+// Smart meal type based on current time
+const getSmartMealType = (lastMealType?: string): string => {
+  const hour = new Date().getHours();
+  if (hour >= 6 && hour < 11) return 'Breakfast';
+  if (hour >= 11 && hour < 15) return 'Lunch';
+  if (hour >= 15 && hour < 19) return 'Dinner';
+  return lastMealType || 'Snack';
+};
 
 export const MealLoggingForm: React.FC<MealLoggingFormProps> = ({
   children,
   onSave,
   onReset,
-  initialData
+  initialData,
+  lastMealType,
+  foodHistory = []
 }) => {
   const [foodName, setFoodName] = useState(initialData?.foodName || '');
-  const [selectedMealType, setSelectedMealType] = useState(initialData?.mealType || 'Breakfast');
+  const [selectedMealType, setSelectedMealType] = useState(
+    initialData?.mealType || getSmartMealType(lastMealType)
+  );
+  const [selectedDate, setSelectedDate] = useState(initialData?.date || new Date());
   const [childResponses, setChildResponses] = useState<ChildResponse[]>(
     initialData?.childResponses || children.map(child => ({ childId: child.id, response: null }))
   );
   const [notes, setNotes] = useState(initialData?.notes || '');
+  
+  const foodInputRef = useRef<TextInput>(null);
 
-  const handleChildResponse = (childId: string, response: 'eaten' | 'partial' | 'refused' | null) => {
+  // Auto-focus food input when form loads
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      foodInputRef.current?.focus();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleChildResponse = useCallback((childId: string, response: 'eaten' | 'partial' | 'refused' | null) => {
     setChildResponses(prev => 
       prev.map(cr => 
         cr.childId === childId ? { ...cr, response } : cr
       )
     );
-  };
+  }, []);
 
-  const handleSave = () => {
+  // Quick actions for all children
+  const handleAllAte = useCallback(() => {
+    setChildResponses(prev => 
+      prev.map(cr => ({ ...cr, response: 'eaten' as const }))
+    );
+  }, []);
+
+  const handleAllRefused = useCallback(() => {
+    setChildResponses(prev => 
+      prev.map(cr => ({ ...cr, response: 'refused' as const }))
+    );
+  }, []);
+
+  const handleSave = useCallback(() => {
     if (!foodName.trim()) {
       Alert.alert('Missing Food', 'Please enter what you served');
       return;
@@ -78,21 +119,24 @@ export const MealLoggingForm: React.FC<MealLoggingFormProps> = ({
     const mealData: MealData = {
       foodName: foodName.trim(),
       mealType: selectedMealType,
-      date: new Date(),
+      date: selectedDate,
       childResponses,
       notes: notes.trim()
     };
 
     onSave(mealData);
-  };
+  }, [foodName, selectedMealType, selectedDate, childResponses, notes, onSave]);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setFoodName('');
-    setSelectedMealType('Breakfast');
+    setSelectedMealType(getSmartMealType(lastMealType));
+    setSelectedDate(new Date());
     setChildResponses(children.map(child => ({ childId: child.id, response: null })));
     setNotes('');
     onReset?.();
-  };
+    // Refocus food input after reset
+    setTimeout(() => foodInputRef.current?.focus(), 100);
+  }, [children, lastMealType, onReset]);
 
   const getResponseColor = (response: 'eaten' | 'partial' | 'refused' | null) => {
     switch (response) {
@@ -114,10 +158,17 @@ export const MealLoggingForm: React.FC<MealLoggingFormProps> = ({
 
   return (
     <VStack space={6}>
-      {/* Meal Type Selection */}
+      {/* Date and Meal Type Selection */}
       <Card>
         <VStack space={4}>
-          <H3>Meal Type</H3>
+          <HStack className="items-center justify-between">
+            <H3>Meal Details</H3>
+            <DatePicker 
+              value={selectedDate}
+              onChange={setSelectedDate}
+              buttonStyle={{ paddingVertical: 8, paddingHorizontal: 12 }}
+            />
+          </HStack>
           <HStack space={2} className="flex-wrap">
             {mealTypes.map((mealType) => (
               <TouchableOpacity
@@ -138,23 +189,42 @@ export const MealLoggingForm: React.FC<MealLoggingFormProps> = ({
         </VStack>
       </Card>
 
-      {/* Food Input */}
-      <Card>
-        <VStack space={4}>
+      {/* Food Input with Autocomplete */}
+      <Card style={{ overflow: 'visible', zIndex: 1 }}>
+        <VStack space={4} className="overflow-visible">
           <H3>What did you serve?</H3>
-          <Input
-            placeholder="Enter food name..."
-            value={foodName}
-            onChangeText={setFoodName}
-            size="large"
-          />
+          <View style={{ overflow: 'visible', zIndex: 100 }}>
+            <FoodAutocomplete
+              value={foodName}
+              onChangeText={setFoodName}
+              foodHistory={foodHistory}
+              placeholder="Start typing food name..."
+              maxSuggestions={5}
+            />
+          </View>
         </VStack>
       </Card>
 
       {/* Child Responses */}
       <Card>
         <VStack space={4}>
-          <H3>How did each child respond?</H3>
+          <HStack className="items-center justify-between">
+            <H3>How did each child respond?</H3>
+            <HStack space={2}>
+              <TouchableOpacity
+                onPress={handleAllAte}
+                className="px-3 py-1 bg-responses-eaten-light border border-responses-eaten rounded-md"
+              >
+                <Caption className="text-responses-eaten-foreground font-medium">All Ate</Caption>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={handleAllRefused}
+                className="px-3 py-1 bg-responses-refused-light border border-responses-refused rounded-md"
+              >
+                <Caption className="text-responses-refused-foreground font-medium">All Refused</Caption>
+              </TouchableOpacity>
+            </HStack>
+          </HStack>
           
           {children.map((child) => {
             const childResponse = childResponses.find(cr => cr.childId === child.id);

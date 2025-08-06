@@ -7,6 +7,7 @@ import {
   StatusBar,
   TextInput,
   Alert,
+  Dimensions,
 } from 'react-native';
 import { styled } from 'nativewind';
 import { InvitationCard, FamilyInvitation } from '../../components/auth/InvitationCard';
@@ -49,6 +50,21 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
   const [acceptingInvitation, setAcceptingInvitation] = useState<string | null>(null);
   const [decliningInvitation, setDecliningInvitation] = useState<string | null>(null);
   const [codeError, setCodeError] = useState<string>('');
+  const [screenData, setScreenData] = useState(Dimensions.get('screen'));
+  
+  // Track orientation changes
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener(
+      'change',
+      ({ screen }) => {
+        setScreenData(screen);
+      }
+    );
+    
+    return () => subscription?.remove();
+  }, []);
+  
+  const isLandscape = screenData.width > screenData.height;
 
   // Mock data for pending invitations
   useEffect(() => {
@@ -166,185 +182,308 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
         <StyledScrollView
           contentContainerStyle={{
             flexGrow: 1,
-            paddingHorizontal: spacing[4],
-            paddingTop: spacing[4],
+            paddingHorizontal: isLandscape ? spacing[6] : spacing[4],
+            paddingTop: isLandscape ? spacing[2] : spacing[4],
           }}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
           {/* Header */}
-          <StyledView style={{ marginBottom: spacing[6] }}>
+          <StyledView style={{ marginBottom: isLandscape ? spacing[4] : spacing[6] }}>
             <StyledText
               style={{
-                ...responsiveTextStyles.screenTitle,
+                ...(isLandscape ? textStyles.h2 : responsiveTextStyles.screenTitle),
                 color: colors.foreground.DEFAULT,
                 textAlign: 'center',
-                marginBottom: spacing[2],
+                marginBottom: isLandscape ? spacing[1] : spacing[2],
               }}
             >
               Join a Family
             </StyledText>
             <StyledText
               style={{
-                ...textStyles.body,
+                ...(isLandscape ? textStyles.bodySmall : textStyles.body),
                 color: colors.foreground.muted,
                 textAlign: 'center',
+                maxWidth: isLandscape ? 600 : undefined,
+                alignSelf: 'center',
               }}
             >
               Join an existing family to start tracking meals together
             </StyledText>
           </StyledView>
 
-          {/* Pending Invitations Section */}
-          {pendingInvitations.length > 0 && (
-            <StyledView style={{ marginBottom: spacing[6] }}>
-              <StyledText
-                style={{
-                  ...textStyles.h4,
-                  color: colors.foreground.DEFAULT,
-                  marginBottom: spacing[4],
-                }}
-              >
-                Pending Invitations
-              </StyledText>
-              
-              <StyledView style={{ gap: spacing[4] }}>
-                {pendingInvitations.map((invitation) => (
-                  <InvitationCard
-                    key={invitation.id}
-                    invitation={invitation}
-                    onAccept={handleAcceptInvitation}
-                    onDecline={handleDeclineInvitation}
-                    acceptLoading={acceptingInvitation === invitation.id}
-                    declineLoading={decliningInvitation === invitation.id}
-                    disabled={acceptingInvitation !== null || decliningInvitation !== null}
-                  />
-                ))}
-              </StyledView>
-            </StyledView>
-          )}
-
-          {/* Divider */}
-          {pendingInvitations.length > 0 && (
+          {/* Main Content - Responsive Layout */}
+          {isLandscape && pendingInvitations.length > 0 ? (
+            // Landscape Layout with Invitations: Side-by-side
             <StyledView 
               style={{
                 flexDirection: 'row',
-                alignItems: 'center',
-                marginBottom: spacing[6],
-              }}
-            >
-              <StyledView 
-                style={{
-                  flex: 1,
-                  height: 1,
-                  backgroundColor: colors.border.DEFAULT,
-                }}
-              />
-              <StyledText
-                style={{
-                  ...textStyles.body,
-                  color: colors.foreground.muted,
-                  marginHorizontal: spacing[4],
-                }}
-              >
-                or use invite code
-              </StyledText>
-              <StyledView 
-                style={{
-                  flex: 1,
-                  height: 1,
-                  backgroundColor: colors.border.DEFAULT,
-                }}
-              />
-            </StyledView>
-          )}
-
-          {/* Invite Code Section */}
-          <StyledView style={{ marginBottom: spacing[8] }}>
-            <StyledText
-              style={{
-                ...textStyles.h4,
-                color: colors.foreground.DEFAULT,
+                gap: spacing[6],
+                flex: 1,
                 marginBottom: spacing[4],
-                textAlign: pendingInvitations.length === 0 ? 'center' : 'left',
               }}
             >
-              Enter Invite Code
-            </StyledText>
-
-            <StyledView style={{ marginBottom: spacing[4] }}>
-              <StyledText
-                style={{
-                  ...textStyles.label,
-                  color: colors.foreground.DEFAULT,
-                  marginBottom: spacing[2],
-                }}
-              >
-                Family Invite Code
-              </StyledText>
-              <StyledTextInput
-                value={inviteCode}
-                onChangeText={(text) => {
-                  setInviteCode(text);
-                  if (codeError && text.trim()) {
-                    setCodeError('');
-                  }
-                }}
-                placeholder="Enter invite code (e.g., FAMILY123)"
-                placeholderTextColor={colors.foreground.light}
-                style={{
-                  ...textStyles.input,
-                  height: 50,
-                  paddingHorizontal: spacing[3],
-                  borderWidth: 1,
-                  borderColor: codeError ? colors.error.DEFAULT : colors.border.DEFAULT,
-                  borderRadius: borderRadius.base,
-                  backgroundColor: colors.background.card,
-                  color: colors.foreground.DEFAULT,
-                  textAlign: 'center',
-                  fontSize: 18,
-                  letterSpacing: 2,
-                  textTransform: 'uppercase',
-                }}
-                accessibilityLabel="Enter family invite code"
-                accessibilityHint="Enter the invite code provided by a family member"
-                testID="invite-code-input"
-                autoCapitalize="characters"
-                autoCorrect={false}
-              />
-              {codeError && (
+              {/* Left Side: Pending Invitations */}
+              <StyledView style={{ flex: 1 }}>
                 <StyledText
                   style={{
-                    ...textStyles.caption,
-                    color: colors.error.DEFAULT,
-                    marginTop: spacing[1],
-                    textAlign: 'center',
+                    ...textStyles.h4,
+                    color: colors.foreground.DEFAULT,
+                    marginBottom: spacing[3],
                   }}
                 >
-                  {codeError}
+                  Pending Invitations
                 </StyledText>
-              )}
-            </StyledView>
+                
+                <StyledView style={{ gap: spacing[3] }}>
+                  {pendingInvitations.map((invitation) => (
+                    <InvitationCard
+                      key={invitation.id}
+                      invitation={invitation}
+                      onAccept={handleAcceptInvitation}
+                      onDecline={handleDeclineInvitation}
+                      acceptLoading={acceptingInvitation === invitation.id}
+                      declineLoading={decliningInvitation === invitation.id}
+                      disabled={acceptingInvitation !== null || decliningInvitation !== null}
+                    />
+                  ))}
+                </StyledView>
+              </StyledView>
 
-            <PrimaryButton
-              onPress={handleJoinWithCode}
-              loading={loading}
-              disabled={loading || !inviteCode.trim()}
-              fullWidth
-              size="large"
-              testID="join-with-code-button"
-            >
-              Join Family
-            </PrimaryButton>
-          </StyledView>
+              {/* Right Side: Invite Code */}
+              <StyledView style={{ flex: 1 }}>
+                <StyledText
+                  style={{
+                    ...textStyles.h4,
+                    color: colors.foreground.DEFAULT,
+                    marginBottom: spacing[3],
+                  }}
+                >
+                  Enter Invite Code
+                </StyledText>
+
+                <StyledView style={{ marginBottom: spacing[4] }}>
+                  <StyledText
+                    style={{
+                      ...textStyles.label,
+                      color: colors.foreground.DEFAULT,
+                      marginBottom: spacing[2],
+                    }}
+                  >
+                    Family Invite Code
+                  </StyledText>
+                  <StyledTextInput
+                    value={inviteCode}
+                    onChangeText={(text) => {
+                      setInviteCode(text);
+                      if (codeError && text.trim()) {
+                        setCodeError('');
+                      }
+                    }}
+                    placeholder="Enter invite code (e.g., FAMILY123)"
+                    placeholderTextColor={colors.foreground.light}
+                    style={{
+                      ...textStyles.input,
+                      height: 44,
+                      paddingHorizontal: spacing[3],
+                      borderWidth: 1,
+                      borderColor: codeError ? colors.error.DEFAULT : colors.border.DEFAULT,
+                      borderRadius: borderRadius.base,
+                      backgroundColor: colors.background.card,
+                      color: colors.foreground.DEFAULT,
+                      textAlign: 'center',
+                      fontSize: 16,
+                      letterSpacing: 2,
+                      textTransform: 'uppercase',
+                    }}
+                    accessibilityLabel="Enter family invite code"
+                    accessibilityHint="Enter the invite code provided by a family member"
+                    testID="invite-code-input"
+                    autoCapitalize="characters"
+                    autoCorrect={false}
+                  />
+                  {codeError && (
+                    <StyledText
+                      style={{
+                        ...textStyles.caption,
+                        color: colors.error.DEFAULT,
+                        marginTop: spacing[1],
+                        textAlign: 'center',
+                      }}
+                    >
+                      {codeError}
+                    </StyledText>
+                  )}
+                </StyledView>
+
+                <PrimaryButton
+                  onPress={handleJoinWithCode}
+                  loading={loading}
+                  disabled={loading || !inviteCode.trim()}
+                  fullWidth
+                  size="medium"
+                  testID="join-with-code-button"
+                >
+                  Join Family
+                </PrimaryButton>
+              </StyledView>
+            </StyledView>
+          ) : (
+            // Portrait Layout or No Invitations: Original vertical layout
+            <>
+              {/* Pending Invitations Section */}
+              {pendingInvitations.length > 0 && (
+                <StyledView style={{ marginBottom: isLandscape ? spacing[4] : spacing[6] }}>
+                  <StyledText
+                    style={{
+                      ...textStyles.h4,
+                      color: colors.foreground.DEFAULT,
+                      marginBottom: spacing[4],
+                    }}
+                  >
+                    Pending Invitations
+                  </StyledText>
+                  
+                  <StyledView style={{ gap: spacing[4] }}>
+                    {pendingInvitations.map((invitation) => (
+                      <InvitationCard
+                        key={invitation.id}
+                        invitation={invitation}
+                        onAccept={handleAcceptInvitation}
+                        onDecline={handleDeclineInvitation}
+                        acceptLoading={acceptingInvitation === invitation.id}
+                        declineLoading={decliningInvitation === invitation.id}
+                        disabled={acceptingInvitation !== null || decliningInvitation !== null}
+                      />
+                    ))}
+                  </StyledView>
+                </StyledView>
+              )}
+
+              {/* Divider */}
+              {pendingInvitations.length > 0 && (
+                <StyledView 
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginBottom: isLandscape ? spacing[4] : spacing[6],
+                  }}
+                >
+                  <StyledView 
+                    style={{
+                      flex: 1,
+                      height: 1,
+                      backgroundColor: colors.border.DEFAULT,
+                    }}
+                  />
+                  <StyledText
+                    style={{
+                      ...(isLandscape ? textStyles.bodySmall : textStyles.body),
+                      color: colors.foreground.muted,
+                      marginHorizontal: spacing[4],
+                    }}
+                  >
+                    or use invite code
+                  </StyledText>
+                  <StyledView 
+                    style={{
+                      flex: 1,
+                      height: 1,
+                      backgroundColor: colors.border.DEFAULT,
+                    }}
+                  />
+                </StyledView>
+              )}
+
+              {/* Invite Code Section */}
+              <StyledView style={{ marginBottom: isLandscape ? spacing[4] : spacing[8] }}>
+                <StyledText
+                  style={{
+                    ...textStyles.h4,
+                    color: colors.foreground.DEFAULT,
+                    marginBottom: spacing[4],
+                    textAlign: pendingInvitations.length === 0 ? 'center' : 'left',
+                  }}
+                >
+                  Enter Invite Code
+                </StyledText>
+
+                <StyledView style={{ marginBottom: spacing[4] }}>
+                  <StyledText
+                    style={{
+                      ...textStyles.label,
+                      color: colors.foreground.DEFAULT,
+                      marginBottom: spacing[2],
+                    }}
+                  >
+                    Family Invite Code
+                  </StyledText>
+                  <StyledTextInput
+                    value={inviteCode}
+                    onChangeText={(text) => {
+                      setInviteCode(text);
+                      if (codeError && text.trim()) {
+                        setCodeError('');
+                      }
+                    }}
+                    placeholder="Enter invite code (e.g., FAMILY123)"
+                    placeholderTextColor={colors.foreground.light}
+                    style={{
+                      ...textStyles.input,
+                      height: isLandscape ? 44 : 50,
+                      paddingHorizontal: spacing[3],
+                      borderWidth: 1,
+                      borderColor: codeError ? colors.error.DEFAULT : colors.border.DEFAULT,
+                      borderRadius: borderRadius.base,
+                      backgroundColor: colors.background.card,
+                      color: colors.foreground.DEFAULT,
+                      textAlign: 'center',
+                      fontSize: isLandscape ? 16 : 18,
+                      letterSpacing: 2,
+                      textTransform: 'uppercase',
+                    }}
+                    accessibilityLabel="Enter family invite code"
+                    accessibilityHint="Enter the invite code provided by a family member"
+                    testID="invite-code-input"
+                    autoCapitalize="characters"
+                    autoCorrect={false}
+                  />
+                  {codeError && (
+                    <StyledText
+                      style={{
+                        ...textStyles.caption,
+                        color: colors.error.DEFAULT,
+                        marginTop: spacing[1],
+                        textAlign: 'center',
+                      }}
+                    >
+                      {codeError}
+                    </StyledText>
+                  )}
+                </StyledView>
+
+                <PrimaryButton
+                  onPress={handleJoinWithCode}
+                  loading={loading}
+                  disabled={loading || !inviteCode.trim()}
+                  fullWidth
+                  size={isLandscape ? "medium" : "large"}
+                  testID="join-with-code-button"
+                >
+                  Join Family
+                </PrimaryButton>
+              </StyledView>
+            </>
+          )}
 
           {/* Alternative Action */}
-          <StyledView style={{ marginTop: 'auto', paddingBottom: spacing[4] }}>
+          <StyledView style={{ marginTop: 'auto', paddingBottom: isLandscape ? spacing[2] : spacing[4] }}>
             <SecondaryButton
               onPress={onCreateNewFamily}
               disabled={loading || acceptingInvitation !== null || decliningInvitation !== null}
               fullWidth
-              size="large"
+              size={isLandscape ? "medium" : "large"}
               testID="create-new-family-button"
             >
               Create New Family Instead

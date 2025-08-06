@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   SafeAreaView,
   ScrollView,
   StatusBar,
   Alert,
+  Dimensions,
 } from 'react-native';
 import { styled } from 'nativewind';
 import { FamilySetupForm } from '../../components/auth/FamilySetupForm';
@@ -38,6 +39,21 @@ export const FamilySetupScreen: React.FC<FamilySetupScreenProps> = ({
   onError,
 }) => {
   const [loading, setLoading] = useState(false);
+  const [screenData, setScreenData] = useState(Dimensions.get('screen'));
+  
+  // Track orientation changes
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener(
+      'change',
+      ({ screen }) => {
+        setScreenData(screen);
+      }
+    );
+    
+    return () => subscription?.remove();
+  }, []);
+  
+  const isLandscape = screenData.width > screenData.height;
 
   // Handle family creation
   const handleFamilyCreated = async (familyData: { familyName: string; childrenNames: string[] }) => {
@@ -82,7 +98,8 @@ export const FamilySetupScreen: React.FC<FamilySetupScreenProps> = ({
         <StyledScrollView
           contentContainerStyle={{
             flexGrow: 1,
-            paddingTop: spacing[4],
+            paddingTop: isLandscape ? spacing[2] : spacing[4],
+            paddingHorizontal: isLandscape ? spacing[6] : 0,
           }}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
@@ -91,6 +108,7 @@ export const FamilySetupScreen: React.FC<FamilySetupScreenProps> = ({
             onFamilyCreated={handleFamilyCreated}
             onJoinExistingFamily={handleJoinExistingFamily}
             loading={loading}
+            isLandscape={isLandscape}
           />
         </StyledScrollView>
       </StyledSafeAreaView>

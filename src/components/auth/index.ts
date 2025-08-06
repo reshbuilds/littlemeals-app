@@ -16,3 +16,6 @@ export type { AuthLoadingStateProps, AuthLoadingType } from './AuthLoadingState'
 
 export { OnboardingStep } from './OnboardingStep';
 export type { OnboardingStepProps } from './OnboardingStep';
+
+export { PermissionManager } from './PermissionManager';
+export type { PermissionManagerProps, FamilyRole, FamilyMember, Permission } from './PermissionManager';

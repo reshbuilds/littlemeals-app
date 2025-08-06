@@ -18,6 +18,7 @@ import {
   PrimaryButton,
   colors
 } from '@/components/design-system';
+import { PermissionManager, FamilyMember } from '@/components/auth';
 
 // Mock data for demonstration
 const mockFamily = {
@@ -33,10 +34,32 @@ const mockChildren = [
   { id: '3', name: 'Dee-Dee-Dee', age: 6, avatar: '🧒', birthdate: '2018-11-10' }
 ];
 
-const mockFamilyMembers = [
-  { id: '1', name: 'Mom (You)', email: 'mom@example.com', role: 'admin', avatar: '👩' },
-  { id: '2', name: 'Dad', email: 'dad@example.com', role: 'member', avatar: '👨' },
-  { id: '3', name: 'Grandma', email: 'grandma@example.com', role: 'viewer', avatar: '👵' }
+const mockFamilyMembers: FamilyMember[] = [
+  { 
+    id: '1', 
+    name: 'Mom', 
+    email: 'mom@example.com', 
+    role: 'admin', 
+    avatar: '👩',
+    isCurrentUser: true,
+    joinedAt: new Date('2024-01-15')
+  },
+  { 
+    id: '2', 
+    name: 'Dad', 
+    email: 'dad@example.com', 
+    role: 'caregiver', 
+    avatar: '👨',
+    joinedAt: new Date('2024-01-16')
+  },
+  { 
+    id: '3', 
+    name: 'Grandma', 
+    email: 'grandma@example.com', 
+    role: 'viewer', 
+    avatar: '👵',
+    joinedAt: new Date('2024-02-01')
+  }
 ];
 
 const StyledScrollView = styled(ScrollView);
@@ -47,6 +70,8 @@ const SettingsScreen = () => {
   const [autoSync, setAutoSync] = useState(true);
   const [showAddChild, setShowAddChild] = useState(false);
   const [newChildName, setNewChildName] = useState('');
+  const [showPermissionManager, setShowPermissionManager] = useState(false);
+  const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>(mockFamilyMembers);
 
   const handleInviteFamily = () => {
     Alert.alert(
@@ -103,6 +128,30 @@ const SettingsScreen = () => {
         { text: 'Cancel', style: 'cancel' }
       ]
     );
+  };
+
+  // Permission Manager handlers
+  const handleRoleChange = async (memberId: string, newRole: any) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    setFamilyMembers(prev => 
+      prev.map(member => 
+        member.id === memberId 
+          ? { ...member, role: newRole }
+          : member
+      )
+    );
+    
+    Alert.alert('Success', 'Role updated successfully!');
+  };
+
+  const handleRemoveMember = async (memberId: string) => {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    setFamilyMembers(prev => prev.filter(member => member.id !== memberId));
+    Alert.alert('Success', 'Member removed from family');
   };
 
   const renderSettingItem = (
@@ -164,19 +213,21 @@ const SettingsScreen = () => {
                     <VStack space={1}>
                       <Body className="font-medium">{mockFamily.name}</Body>
                       <Caption className="text-foreground-muted">
-                        {mockFamilyMembers.length} members • {mockChildren.length} children
+                        {familyMembers.length} members • {mockChildren.length} children
                       </Caption>
                     </VStack>
                   </HStack>
                   
                   <VStack space={2}>
                     <Caption className="text-foreground-muted font-medium">Family Members:</Caption>
-                    {mockFamilyMembers.map((member) => (
+                    {familyMembers.map((member) => (
                       <HStack key={member.id} className="items-center justify-between">
                         <HStack className="items-center">
                           <Text className="mr-2">{member.avatar}</Text>
                           <VStack space={1}>
-                            <Caption className="font-medium">{member.name}</Caption>
+                            <Caption className="font-medium">
+                              {member.name}{member.isCurrentUser ? ' (You)' : ''}
+                            </Caption>
                             <Caption className="text-foreground-light text-xs">{member.role}</Caption>
                           </VStack>
                         </HStack>
@@ -188,6 +239,17 @@ const SettingsScreen = () => {
                       </HStack>
                     ))}
                   </VStack>
+                  
+                  {/* Manage Permissions Button */}
+                  <TouchableOpacity 
+                    onPress={() => setShowPermissionManager(true)}
+                    className="p-3 bg-primary-light rounded-lg border border-primary-DEFAULT"
+                  >
+                    <HStack className="items-center justify-center">
+                      <Text className="text-lg mr-2">👑</Text>
+                      <Body className="font-medium text-primary">Manage Family Permissions</Body>
+                    </HStack>
+                  </TouchableOpacity>
                 </VStack>
               </VStack>
             </Card>
@@ -409,6 +471,49 @@ const SettingsScreen = () => {
           </VStack>
         </Container>
       </StyledScrollView>
+
+      {/* Permission Manager Modal */}
+      {showPermissionManager && (
+        <View style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: colors.background.DEFAULT,
+          zIndex: 1000,
+        }}>
+          {/* Header with Close Button */}
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: 16,
+            paddingTop: 60, // Account for status bar
+            borderBottomWidth: 1,
+            borderBottomColor: colors.border.DEFAULT,
+            backgroundColor: colors.background.card,
+          }}>
+            <TouchableOpacity onPress={() => setShowPermissionManager(false)}>
+              <Text style={{ fontSize: 24 }}>←</Text>
+            </TouchableOpacity>
+            <Text style={{ fontSize: 18, fontWeight: '600', color: colors.foreground.DEFAULT }}>
+              Family Permissions
+            </Text>
+            <View style={{ width: 24 }} />
+          </View>
+          
+          {/* Permission Manager Component */}
+          <View style={{ flex: 1 }}>
+            <PermissionManager
+              members={familyMembers}
+              currentUserId="1"
+              onRoleChange={handleRoleChange}
+              onRemoveMember={handleRemoveMember}
+            />
+          </View>
+        </View>
+      )}
     </Screen>
   );
 };
