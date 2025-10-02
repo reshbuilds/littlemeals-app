@@ -5,13 +5,10 @@ import {
   ActivityIndicator,
   Animated,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { colors } from '../../constants/colors';
 import { spacing } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
 
 export type AuthLoadingType = 
   | 'signing_in'
@@ -149,7 +146,7 @@ export const AuthLoadingState: React.FC<AuthLoadingStateProps> = ({
   }, [progress, config.duration, progressAnim]);
 
   return (
-    <StyledView
+    <View
       style={{
         flex: 1,
         justifyContent: 'center',
@@ -165,13 +162,13 @@ export const AuthLoadingState: React.FC<AuthLoadingStateProps> = ({
           marginBottom: spacing[6],
         }}
       >
-        <StyledText style={{ fontSize: 64 }}>
+        <Text style={{ fontSize: 64 }}>
           {config.emoji}
-        </StyledText>
+        </Text>
       </Animated.View>
 
       {/* Loading Title */}
-      <StyledText
+      <Text
         style={{
           ...textStyles.h2,
           color: colors.foreground.DEFAULT,
@@ -180,10 +177,10 @@ export const AuthLoadingState: React.FC<AuthLoadingStateProps> = ({
         }}
       >
         {config.title}
-      </StyledText>
+      </Text>
 
       {/* Loading Message */}
-      <StyledText
+      <Text
         style={{
           ...textStyles.body,
           color: colors.foreground.muted,
@@ -194,11 +191,11 @@ export const AuthLoadingState: React.FC<AuthLoadingStateProps> = ({
         }}
       >
         {message}
-      </StyledText>
+      </Text>
 
       {/* Progress Bar (if progress is specified) */}
       {(progress !== undefined || config.duration) && (
-        <StyledView
+        <View
           style={{
             width: '100%',
             maxWidth: 200,
@@ -220,7 +217,7 @@ export const AuthLoadingState: React.FC<AuthLoadingStateProps> = ({
               }),
             }}
           />
-        </StyledView>
+        </View>
       )}
 
       {/* Activity Indicator */}
@@ -236,7 +233,7 @@ export const AuthLoadingState: React.FC<AuthLoadingStateProps> = ({
       )}
 
       {/* Helper Text */}
-      <StyledText
+      <Text
         style={{
           ...textStyles.caption,
           color: colors.foreground.light,
@@ -245,8 +242,8 @@ export const AuthLoadingState: React.FC<AuthLoadingStateProps> = ({
         }}
       >
         This may take a few moments...
-      </StyledText>
-    </StyledView>
+      </Text>
+    </View>
   );
 };
 
@@ -300,7 +297,7 @@ const ProgressDots: React.FC = () => {
   }, [dot1Anim, dot2Anim, dot3Anim]);
 
   return (
-    <StyledView
+    <View
       style={{
         flexDirection: 'row',
         alignItems: 'center',
@@ -319,6 +316,6 @@ const ProgressDots: React.FC = () => {
           }}
         />
       ))}
-    </StyledView>
+    </View>
   );
 };

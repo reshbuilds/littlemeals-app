@@ -7,13 +7,10 @@ import {
   TextStyle,
   AccessibilityRole,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { colors } from '../../constants/colors';
 import { spacing, dimensions, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledTouchableOpacity = styled(TouchableOpacity);
-const StyledText = styled(Text);
 
 export type ButtonVariant = 'primary' | 'secondary' | 'child-response';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -206,7 +203,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <StyledTouchableOpacity
+    <TouchableOpacity
       style={[getButtonStyles(), style]}
       onPress={loading ? undefined : onPress}
       disabled={disabled || loading}
@@ -229,13 +226,13 @@ export const Button: React.FC<ButtonProps> = ({
       )}
       
       {typeof children === 'string' ? (
-        <StyledText style={[getTextStyles(), textStyle]}>
+        <Text style={[getTextStyles(), textStyle]}>
           {children}
-        </StyledText>
+        </Text>
       ) : (
         children
       )}
-    </StyledTouchableOpacity>
+    </TouchableOpacity>
   );
 };
 

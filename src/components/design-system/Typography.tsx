@@ -11,7 +11,6 @@
 
 import React from 'react';
 import { Text, TextStyle } from 'react-native';
-import { styled } from 'nativewind';
 import { 
   fontFamilies, 
   fontWeights, 
@@ -24,7 +23,6 @@ import {
 } from '../../constants/typography';
 import { semanticColors } from '../../constants/colors';
 
-const StyledText = styled(Text);
 
 // Base Typography Props
 interface BaseTypographyProps {
@@ -143,7 +141,7 @@ export const Heading: React.FC<HeadingProps> = ({
   `.trim().replace(/\s+/g, ' ');
 
   return (
-    <StyledText
+    <Text
       className={baseClassName}
       style={style}
       numberOfLines={numberOfLines}
@@ -154,7 +152,7 @@ export const Heading: React.FC<HeadingProps> = ({
       accessibilityLevel={level}
     >
       {children}
-    </StyledText>
+    </Text>
   );
 };
 
@@ -239,7 +237,7 @@ export const Body: React.FC<BodyProps> = ({
   `.trim().replace(/\s+/g, ' ');
 
   return (
-    <StyledText
+    <Text
       className={baseClassName}
       style={style}
       numberOfLines={numberOfLines}
@@ -248,7 +246,7 @@ export const Body: React.FC<BodyProps> = ({
       testID={testID}
     >
       {children}
-    </StyledText>
+    </Text>
   );
 };
 
@@ -308,7 +306,7 @@ export const Caption: React.FC<CaptionProps> = ({
   `.trim().replace(/\s+/g, ' ');
 
   return (
-    <StyledText
+    <Text
       className={baseClassName}
       style={style}
       numberOfLines={numberOfLines}
@@ -317,7 +315,7 @@ export const Caption: React.FC<CaptionProps> = ({
       testID={testID}
     >
       {children}
-    </StyledText>
+    </Text>
   );
 };
 
@@ -371,7 +369,7 @@ export const Label: React.FC<LabelProps> = ({
   `.trim().replace(/\s+/g, ' ');
 
   return (
-    <StyledText
+    <Text
       className={baseClassName}
       style={style}
       numberOfLines={numberOfLines}
@@ -382,9 +380,9 @@ export const Label: React.FC<LabelProps> = ({
     >
       {children}
       {required && (
-        <StyledText className="text-error-DEFAULT ml-1">*</StyledText>
+        <Text className="text-error-DEFAULT ml-1">*</Text>
       )}
-    </StyledText>
+    </Text>
   );
 };
 
@@ -434,7 +432,7 @@ export const Code: React.FC<CodeProps> = ({
   `.trim().replace(/\s+/g, ' ');
 
   return (
-    <StyledText
+    <Text
       className={baseClassName}
       style={style}
       numberOfLines={numberOfLines}
@@ -445,7 +443,7 @@ export const Code: React.FC<CodeProps> = ({
       accessibilityHint={language ? `Code in ${language}` : 'Code snippet'}
     >
       {children}
-    </StyledText>
+    </Text>
   );
 };
 
@@ -516,7 +514,7 @@ export const Link: React.FC<LinkProps> = ({
   `.trim().replace(/\s+/g, ' ');
 
   return (
-    <StyledText
+    <Text
       className={baseClassName}
       style={style}
       numberOfLines={numberOfLines}
@@ -529,6 +527,6 @@ export const Link: React.FC<LinkProps> = ({
     >
       {children}
       {external && ' ↗'}
-    </StyledText>
+    </Text>
   );
 };

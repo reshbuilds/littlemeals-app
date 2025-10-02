@@ -4,15 +4,11 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { PrimaryButton, SecondaryButton } from '../design-system/Button';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export type AuthErrorType = 
   | 'oauth_failed'
@@ -142,7 +138,7 @@ export const AuthErrorState: React.FC<AuthErrorStateProps> = ({
   const message = customMessage || config.message;
 
   return (
-    <StyledView
+    <View
       style={{
         backgroundColor: colors.background.card,
         borderRadius: borderRadius.base,
@@ -162,17 +158,17 @@ export const AuthErrorState: React.FC<AuthErrorStateProps> = ({
       }}
     >
       {/* Error Icon */}
-      <StyledText 
+      <Text 
         style={{ 
           fontSize: 48, 
           marginBottom: spacing[4] 
         }}
       >
         {config.emoji}
-      </StyledText>
+      </Text>
 
       {/* Error Title */}
-      <StyledText
+      <Text
         style={{
           ...textStyles.h3,
           color: colors.foreground.DEFAULT,
@@ -181,10 +177,10 @@ export const AuthErrorState: React.FC<AuthErrorStateProps> = ({
         }}
       >
         {config.title}
-      </StyledText>
+      </Text>
 
       {/* Error Message */}
-      <StyledText
+      <Text
         style={{
           ...textStyles.body,
           color: colors.foreground.muted,
@@ -194,10 +190,10 @@ export const AuthErrorState: React.FC<AuthErrorStateProps> = ({
         }}
       >
         {message}
-      </StyledText>
+      </Text>
 
       {/* Action Buttons */}
-      <StyledView style={{ width: '100%', gap: spacing[3] }}>
+      <View style={{ width: '100%', gap: spacing[3] }}>
         {/* Primary Action (Retry) */}
         {config.retryText && onRetry && (
           <PrimaryButton
@@ -224,11 +220,11 @@ export const AuthErrorState: React.FC<AuthErrorStateProps> = ({
             {config.alternativeText}
           </SecondaryButton>
         )}
-      </StyledView>
+      </View>
 
       {/* Support Link */}
       {showSupport && onContactSupport && (
-        <StyledTouchableOpacity
+        <TouchableOpacity
           onPress={onContactSupport}
           style={{
             marginTop: spacing[4],
@@ -237,7 +233,7 @@ export const AuthErrorState: React.FC<AuthErrorStateProps> = ({
           accessibilityLabel="Contact support"
           accessibilityRole="button"
         >
-          <StyledText
+          <Text
             style={{
               ...textStyles.body,
               color: colors.primary.DEFAULT,
@@ -245,9 +241,9 @@ export const AuthErrorState: React.FC<AuthErrorStateProps> = ({
             }}
           >
             Need help? Contact Support
-          </StyledText>
-        </StyledTouchableOpacity>
+          </Text>
+        </TouchableOpacity>
       )}
-    </StyledView>
+    </View>
   );
 };

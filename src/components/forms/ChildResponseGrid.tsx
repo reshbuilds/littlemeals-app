@@ -15,14 +15,10 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { colors } from '../../constants/colors';
 import { spacing } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export type ResponseType = 'eaten' | 'partial' | 'refused' | null;
 
@@ -95,19 +91,19 @@ const ChildResponseRow: React.FC<ChildResponseRowProps> = memo(({
   onResponseChange,
 }) => {
   return (
-    <StyledView className="space-y-3 mb-6">
-      <StyledView className="flex-row items-center justify-between">
-        <StyledView>
-          <StyledText className="text-lg font-medium text-foreground">
+    <View className="space-y-3 mb-6">
+      <View className="flex-row items-center justify-between">
+        <View>
+          <Text className="text-lg font-medium text-foreground">
             {child.name}
-          </StyledText>
-          <StyledText className="text-sm text-foreground-muted">
+          </Text>
+          <Text className="text-sm text-foreground-muted">
             {child.age} years
-          </StyledText>
-        </StyledView>
+          </Text>
+        </View>
         
-        <StyledView className="flex-row gap-2">
-          <StyledTouchableOpacity
+        <View className="flex-row gap-2">
+          <TouchableOpacity
             onPress={() => onResponseChange('eaten')}
             className={`w-14 h-14 rounded-full items-center justify-center ${
               response === 'eaten'
@@ -119,10 +115,10 @@ const ChildResponseRow: React.FC<ChildResponseRowProps> = memo(({
             accessibilityState={{ selected: response === 'eaten' }}
             testID={`child-response-${child.id}-eaten`}
           >
-            <StyledText className="text-2xl">✓</StyledText>
-          </StyledTouchableOpacity>
+            <Text className="text-2xl">✓</Text>
+          </TouchableOpacity>
           
-          <StyledTouchableOpacity
+          <TouchableOpacity
             onPress={() => onResponseChange('partial')}
             className={`w-14 h-14 rounded-full items-center justify-center ${
               response === 'partial'
@@ -134,10 +130,10 @@ const ChildResponseRow: React.FC<ChildResponseRowProps> = memo(({
             accessibilityState={{ selected: response === 'partial' }}
             testID={`child-response-${child.id}-partial`}
           >
-            <StyledText className="text-lg">◐</StyledText>
-          </StyledTouchableOpacity>
+            <Text className="text-lg">◐</Text>
+          </TouchableOpacity>
           
-          <StyledTouchableOpacity
+          <TouchableOpacity
             onPress={() => onResponseChange('refused')}
             className={`w-14 h-14 rounded-full items-center justify-center ${
               response === 'refused'
@@ -149,11 +145,11 @@ const ChildResponseRow: React.FC<ChildResponseRowProps> = memo(({
             accessibilityState={{ selected: response === 'refused' }}
             testID={`child-response-${child.id}-refused`}
           >
-            <StyledText className="text-xl">×</StyledText>
-          </StyledTouchableOpacity>
-        </StyledView>
-      </StyledView>
-    </StyledView>
+            <Text className="text-xl">×</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
   );
 });
 
@@ -174,7 +170,7 @@ export const ChildResponseGrid: React.FC<ChildResponseGridProps> = ({
   testID = 'child-response-grid',
 }) => {
   return (
-    <StyledView
+    <View
       style={style}
       accessibilityRole="group"
       accessibilityLabel="Child response selection"
@@ -182,34 +178,34 @@ export const ChildResponseGrid: React.FC<ChildResponseGridProps> = ({
     >
       {/* Quick Action Buttons */}
       {showQuickActions && (onAllAte || onAllRefused) && (
-        <StyledView className="flex-row justify-end space-x-2 mb-4">
+        <View className="flex-row justify-end space-x-2 mb-4">
           {onAllAte && (
-            <StyledTouchableOpacity
+            <TouchableOpacity
               onPress={onAllAte}
               className="px-3 py-1 bg-success-light border border-success rounded-md"
               accessibilityRole="button"
               accessibilityLabel="Mark all children as ate"
               testID={`${testID}-all-ate`}
             >
-              <StyledText className="text-xs font-medium text-success-foreground">
+              <Text className="text-xs font-medium text-success-foreground">
                 All Ate
-              </StyledText>
-            </StyledTouchableOpacity>
+              </Text>
+            </TouchableOpacity>
           )}
           {onAllRefused && (
-            <StyledTouchableOpacity
+            <TouchableOpacity
               onPress={onAllRefused}
               className="px-3 py-1 bg-error-light border border-error rounded-md"
               accessibilityRole="button"
               accessibilityLabel="Mark all children as refused"
               testID={`${testID}-all-refused`}
             >
-              <StyledText className="text-xs font-medium text-error-foreground">
+              <Text className="text-xs font-medium text-error-foreground">
                 All Refused
-              </StyledText>
-            </StyledTouchableOpacity>
+              </Text>
+            </TouchableOpacity>
           )}
-        </StyledView>
+        </View>
       )}
       
       {/* Individual Child Responses */}
@@ -224,7 +220,7 @@ export const ChildResponseGrid: React.FC<ChildResponseGridProps> = ({
           />
         );
       })}
-    </StyledView>
+    </View>
   );
 };
 

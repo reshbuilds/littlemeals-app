@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Alert, Switch } from 'react-native';
-import { styled } from 'nativewind';
 import { useChildren } from '@/contexts/ChildrenContext';
 import { 
   Screen, 
@@ -62,7 +61,6 @@ const mockFamilyMembers: FamilyMember[] = [
   }
 ];
 
-const StyledScrollView = styled(ScrollView);
 
 const SettingsScreen = () => {
   const [notifications, setNotifications] = useState(true);
@@ -185,7 +183,7 @@ const SettingsScreen = () => {
 
   return (
     <Screen>
-      <StyledScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <Container>
           <VStack space={6} className="py-4">
             
@@ -470,7 +468,7 @@ const SettingsScreen = () => {
 
           </VStack>
         </Container>
-      </StyledScrollView>
+      </ScrollView>
 
       {/* Permission Manager Modal */}
       {showPermissionManager && (

@@ -21,15 +21,10 @@ import {
   ViewStyle,
   TextInputProps,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledTextInput = styled(TextInput);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export interface FoodItem {
   id: string;
@@ -140,7 +135,7 @@ const SuggestionItem: React.FC<SuggestionItemProps> = React.memo(({
   const textParts = getHighlightedText(food.name, searchTerm);
 
   return (
-    <StyledTouchableOpacity
+    <TouchableOpacity
       onPress={() => onSelect(food)}
       style={{
         flexDirection: 'row',
@@ -155,7 +150,7 @@ const SuggestionItem: React.FC<SuggestionItemProps> = React.memo(({
       testID={`food-suggestion-${food.id}`}
     >
       {/* Search Icon */}
-      <StyledText
+      <Text
         style={{
           fontSize: 16,
           color: colors.foreground.muted,
@@ -163,13 +158,13 @@ const SuggestionItem: React.FC<SuggestionItemProps> = React.memo(({
         }}
       >
         🔍
-      </StyledText>
+      </Text>
       
       {/* Food Name with Highlighting */}
-      <StyledView style={{ flex: 1 }}>
-        <StyledText style={{ fontSize: 16, color: '#000000' }}>
+      <View style={{ flex: 1 }}>
+        <Text style={{ fontSize: 16, color: '#000000' }}>
           {typeof textParts === 'string' ? textParts : textParts.map((part, index) => (
-            <StyledText
+            <Text
               key={index}
               style={{
                 fontWeight: part.toLowerCase() === searchTerm.toLowerCase() ? '600' : '400',
@@ -179,11 +174,11 @@ const SuggestionItem: React.FC<SuggestionItemProps> = React.memo(({
               }}
             >
               {part}
-            </StyledText>
+            </Text>
           ))}
-        </StyledText>
-      </StyledView>
-    </StyledTouchableOpacity>
+        </Text>
+      </View>
+    </TouchableOpacity>
   );
 });
 
@@ -280,9 +275,9 @@ export const FoodAutocomplete: React.FC<FoodAutocompleteProps> = ({
   }, [value]);
 
   return (
-    <StyledView style={style} testID={testID}>
+    <View style={style} testID={testID}>
       {/* Food Input Field - Maintains exact current styling */}
-      <StyledTextInput
+      <TextInput
         ref={inputRef}
         value={value}
         onChangeText={handleTextChange}
@@ -316,7 +311,7 @@ export const FoodAutocomplete: React.FC<FoodAutocompleteProps> = ({
 
       {/* Inline Food Suggestions - No Modal Issues */}
       {showSuggestions && suggestions.length > 0 && (
-        <StyledView
+        <View
           style={{
             backgroundColor: colors.background.card,
             borderRadius: borderRadius.base,
@@ -345,9 +340,9 @@ export const FoodAutocomplete: React.FC<FoodAutocompleteProps> = ({
               />
             ))}
           </ScrollView>
-        </StyledView>
+        </View>
       )}
-    </StyledView>
+    </View>
   );
 };
 

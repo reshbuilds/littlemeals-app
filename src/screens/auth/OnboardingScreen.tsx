@@ -7,16 +7,12 @@ import {
   Alert,
   Dimensions,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { OnboardingStep } from '../../components/auth/OnboardingStep';
 import { ChildResponseButton } from '../../components/design-system/Button';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledSafeAreaView = styled(SafeAreaView);
-const StyledView = styled(View);
-const StyledText = styled(Text);
 
 export interface OnboardingScreenProps {
   /**
@@ -121,7 +117,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
 
   // Demo meal logging component
   const MealLoggingDemo = () => (
-    <StyledView
+    <View
       style={{
         backgroundColor: colors.background.card,
         borderRadius: borderRadius.base,
@@ -132,8 +128,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
       }}
     >
       {/* Meal Info */}
-      <StyledView style={{ marginBottom: spacing[4] }}>
-        <StyledText
+      <View style={{ marginBottom: spacing[4] }}>
+        <Text
           style={{
             ...textStyles.h4,
             color: colors.foreground.DEFAULT,
@@ -141,22 +137,22 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
           }}
         >
           🥞 Banana Pancakes
-        </StyledText>
-        <StyledText
+        </Text>
+        <Text
           style={{
             ...textStyles.body,
             color: colors.foreground.muted,
           }}
         >
           Breakfast • Today
-        </StyledText>
-      </StyledView>
+        </Text>
+      </View>
 
       {/* Child Responses */}
-      <StyledView style={{ gap: spacing[3] }}>
+      <View style={{ gap: spacing[3] }}>
         {childrenNames.map((childName) => (
-          <StyledView key={childName}>
-            <StyledText
+          <View key={childName}>
+            <Text
               style={{
                 ...textStyles.label,
                 color: colors.foreground.DEFAULT,
@@ -164,10 +160,10 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
               }}
             >
               {childName}
-            </StyledText>
-            <StyledView style={{ flexDirection: 'row', gap: spacing[2] }}>
+            </Text>
+            <View style={{ flexDirection: 'row', gap: spacing[2] }}>
               {(['eaten', 'partial', 'refused'] as const).map((response) => (
-                <StyledView key={response} style={{ flex: 1 }}>
+                <View key={response} style={{ flex: 1 }}>
                   <ChildResponseButton
                     responseType={response}
                     onPress={() => handleChildResponseSelect(childName, response)}
@@ -178,13 +174,13 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
                   >
                     {response === 'eaten' ? '✅' : response === 'partial' ? '🟡' : '❌'}
                   </ChildResponseButton>
-                </StyledView>
+                </View>
               ))}
-            </StyledView>
-          </StyledView>
+            </View>
+          </View>
         ))}
-      </StyledView>
-    </StyledView>
+      </View>
+    </View>
   );
 
   // Render current step
@@ -293,14 +289,14 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
         backgroundColor={colors.background.DEFAULT}
         barStyle="dark-content"
       />
-      <StyledSafeAreaView 
+      <SafeAreaView 
         style={{ 
           flex: 1, 
           backgroundColor: colors.background.DEFAULT 
         }}
       >
         {renderStep()}
-      </StyledSafeAreaView>
+      </SafeAreaView>
     </>
   );
 };

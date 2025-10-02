@@ -1,11 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import { styled } from 'nativewind';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
-const StyledTextInput = styled(TextInput);
 
 export interface SimpleCardProps {
   children: React.ReactNode;
@@ -23,16 +18,16 @@ export const SimpleCard: React.FC<SimpleCardProps> = ({
 
   if (onPress) {
     return (
-      <StyledTouchableOpacity onPress={onPress} className={combinedClasses}>
+      <TouchableOpacity onPress={onPress} className={combinedClasses}>
         {children}
-      </StyledTouchableOpacity>
+      </TouchableOpacity>
     );
   }
 
   return (
-    <StyledView className={combinedClasses}>
+    <View className={combinedClasses}>
       {children}
-    </StyledView>
+    </View>
   );
 };
 
@@ -42,9 +37,9 @@ export const VStack: React.FC<{ children: React.ReactNode; space?: number; class
   space = 4, 
   className = '' 
 }) => (
-  <StyledView className={`space-y-${space} ${className}`}>
+  <View className={`space-y-${space} ${className}`}>
     {children}
-  </StyledView>
+  </View>
 );
 
 export const HStack: React.FC<{ children: React.ReactNode; space?: number; className?: string }> = ({ 
@@ -52,47 +47,47 @@ export const HStack: React.FC<{ children: React.ReactNode; space?: number; class
   space = 4, 
   className = '' 
 }) => (
-  <StyledView className={`flex-row space-x-${space} ${className}`}>
+  <View className={`flex-row space-x-${space} ${className}`}>
     {children}
-  </StyledView>
+  </View>
 );
 
 // Simple typography components
 export const H1: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <StyledText className={`text-3xl font-bold text-foreground ${className}`}>
+  <Text className={`text-3xl font-bold text-foreground ${className}`}>
     {children}
-  </StyledText>
+  </Text>
 );
 
 export const H3: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <StyledText className={`text-xl font-semibold text-foreground ${className}`}>
+  <Text className={`text-xl font-semibold text-foreground ${className}`}>
     {children}
-  </StyledText>
+  </Text>
 );
 
 export const Body: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <StyledText className={`text-base text-foreground ${className}`}>
+  <Text className={`text-base text-foreground ${className}`}>
     {children}
-  </StyledText>
+  </Text>
 );
 
 export const Caption: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <StyledText className={`text-sm text-foreground-muted ${className}`}>
+  <Text className={`text-sm text-foreground-muted ${className}`}>
     {children}
-  </StyledText>
+  </Text>
 );
 
 // Screen and Container components
 export const Screen: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <StyledView className={`flex-1 bg-background ${className}`}>
+  <View className={`flex-1 bg-background ${className}`}>
     {children}
-  </StyledView>
+  </View>
 );
 
 export const Container: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
-  <StyledView className={`px-4 ${className}`}>
+  <View className={`px-4 ${className}`}>
     {children}
-  </StyledView>
+  </View>
 );
 
 // Input component
@@ -108,7 +103,7 @@ export const Input: React.FC<{
   const sizeClasses = size === 'large' ? 'py-4 px-4 text-lg' : size === 'small' ? 'py-2 px-3 text-sm' : 'py-3 px-4 text-base';
   
   return (
-    <StyledTextInput
+    <TextInput
       placeholder={placeholder}
       value={value}
       onChangeText={onChangeText}
@@ -136,12 +131,12 @@ export const Button: React.FC<{
     'bg-background-secondary border border-border';
   
   return (
-    <StyledTouchableOpacity 
+    <TouchableOpacity 
       onPress={onPress} 
       className={`${baseClasses} ${sizeClasses} ${variantClasses} ${className}`}
     >
       {children}
-    </StyledTouchableOpacity>
+    </TouchableOpacity>
   );
 };
 

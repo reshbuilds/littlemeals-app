@@ -8,16 +8,11 @@ import {
   Alert,
   Dimensions,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { GoogleButton, AppleButton, EmailButton } from '../../components/auth/OAuthButton';
 import { colors } from '../../constants/colors';
 import { spacing } from '../../constants/spacing';
 import { textStyles, responsiveTextStyles } from '../../constants/typography';
 
-const StyledSafeAreaView = styled(SafeAreaView);
-const StyledScrollView = styled(ScrollView);
-const StyledView = styled(View);
-const StyledText = styled(Text);
 
 export interface WelcomeScreenProps {
   /**
@@ -92,13 +87,13 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
         backgroundColor={colors.background.DEFAULT}
         barStyle="dark-content"
       />
-      <StyledSafeAreaView 
+      <SafeAreaView 
         style={{ 
           flex: 1, 
           backgroundColor: colors.background.DEFAULT 
         }}
       >
-        <StyledScrollView
+        <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
             paddingHorizontal: spacing[4],
@@ -107,7 +102,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
         >
           {isLandscape ? (
             // Landscape Layout: Side-by-side
-            <StyledView 
+            <View 
               style={{
                 flex: 1,
                 flexDirection: 'row',
@@ -117,7 +112,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               }}
             >
               {/* Left Side: Hero Content */}
-              <StyledView 
+              <View 
                 style={{
                   flex: 1,
                   alignItems: 'center',
@@ -125,7 +120,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                 }}
               >
                 {/* App Icon/Logo */}
-                <StyledView 
+                <View 
                   style={{
                     width: 80,
                     height: 80,
@@ -141,11 +136,11 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                     elevation: 3,
                   }}
                 >
-                  <StyledText style={{ fontSize: 32 }}>🍽️</StyledText>
-                </StyledView>
+                  <Text style={{ fontSize: 32 }}>🍽️</Text>
+                </View>
 
                 {/* App Name */}
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.h1,
                     color: colors.foreground.DEFAULT,
@@ -154,10 +149,10 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                   }}
                 >
                   LittleMeals
-                </StyledText>
+                </Text>
 
                 {/* Tagline */}
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.body,
                     color: colors.foreground.muted,
@@ -168,10 +163,10 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                   }}
                 >
                   Track your family's meals faster than writing in Apple Notes
-                </StyledText>
+                </Text>
 
                 {/* Key Benefits - Compact */}
-                <StyledView style={{ gap: spacing[2] }}>
+                <View style={{ gap: spacing[2] }}>
                   <BenefitItem 
                     emoji="👨‍👩‍👧‍👦" 
                     text="Family meal tracking" 
@@ -187,11 +182,11 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                     text="AI-powered insights" 
                     compact={true}
                   />
-                </StyledView>
-              </StyledView>
+                </View>
+              </View>
 
               {/* Right Side: Auth Options */}
-              <StyledView 
+              <View 
                 style={{
                   flex: 1,
                   maxWidth: 400,
@@ -211,21 +206,21 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                 />
 
                 {/* Divider */}
-                <StyledView 
+                <View 
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',
                     marginVertical: spacing[1],
                   }}
                 >
-                  <StyledView 
+                  <View 
                     style={{
                       flex: 1,
                       height: 1,
                       backgroundColor: colors.border.DEFAULT,
                     }}
                   />
-                  <StyledText
+                  <Text
                     style={{
                       ...textStyles.caption,
                       color: colors.foreground.muted,
@@ -233,15 +228,15 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                     }}
                   >
                     or
-                  </StyledText>
-                  <StyledView 
+                  </Text>
+                  <View 
                     style={{
                       flex: 1,
                       height: 1,
                       backgroundColor: colors.border.DEFAULT,
                     }}
                   />
-                </StyledView>
+                </View>
 
                 <EmailButton
                   onPress={handleEmailAuth}
@@ -250,7 +245,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                 />
 
                 {/* Terms and Privacy */}
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.caption,
                     color: colors.foreground.muted,
@@ -260,16 +255,16 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                   }}
                 >
                   By continuing, you agree to our Terms of Service and Privacy Policy
-                </StyledText>
-              </StyledView>
-            </StyledView>
+                </Text>
+              </View>
+            </View>
           ) : (
             // Portrait Layout: Original vertical layout
             <>
               {/* Hero Section */}
-              <StyledView className="flex-1 justify-center items-center pt-8">
+              <View className="flex-1 justify-center items-center pt-8">
             {/* App Icon/Logo */}
-            <StyledView 
+            <View 
               style={{
                 width: 120,
                 height: 120,
@@ -288,11 +283,11 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                 elevation: 4,
               }}
             >
-              <StyledText style={{ fontSize: 48 }}>🍽️</StyledText>
-            </StyledView>
+              <Text style={{ fontSize: 48 }}>🍽️</Text>
+            </View>
 
             {/* App Name */}
-            <StyledText
+            <Text
               style={{
                 ...responsiveTextStyles.hero,
                 color: colors.foreground.DEFAULT,
@@ -301,10 +296,10 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               }}
             >
               LittleMeals
-            </StyledText>
+            </Text>
 
             {/* Tagline */}
-            <StyledText
+            <Text
               style={{
                 ...textStyles.bodyLarge,
                 color: colors.foreground.muted,
@@ -315,10 +310,10 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               }}
             >
               Track your family's meals faster than writing in Apple Notes
-            </StyledText>
+            </Text>
 
             {/* Key Benefits */}
-            <StyledView 
+            <View 
               style={{
                 marginBottom: spacing[8],
                 paddingHorizontal: spacing[2],
@@ -336,11 +331,11 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                 emoji="🤖" 
                 text="AI-powered insights and patterns" 
               />
-            </StyledView>
-          </StyledView>
+            </View>
+          </View>
 
           {/* Auth Buttons Section */}
-          <StyledView 
+          <View 
             style={{
               paddingBottom: spacing[6],
               gap: spacing[3],
@@ -360,21 +355,21 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
             />
 
             {/* Divider */}
-            <StyledView 
+            <View 
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
                 marginVertical: spacing[2],
               }}
             >
-              <StyledView 
+              <View 
                 style={{
                   flex: 1,
                   height: 1,
                   backgroundColor: colors.border.DEFAULT,
                 }}
               />
-              <StyledText
+              <Text
                 style={{
                   ...textStyles.caption,
                   color: colors.foreground.muted,
@@ -382,15 +377,15 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
                 }}
               >
                 or
-              </StyledText>
-              <StyledView 
+              </Text>
+              <View 
                 style={{
                   flex: 1,
                   height: 1,
                   backgroundColor: colors.border.DEFAULT,
                 }}
               />
-            </StyledView>
+            </View>
 
             {/* Email Option */}
             <EmailButton
@@ -400,7 +395,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
             />
 
             {/* Terms and Privacy */}
-            <StyledText
+            <Text
               style={{
                 ...textStyles.caption,
                 color: colors.foreground.muted,
@@ -410,12 +405,12 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
               }}
             >
               By continuing, you agree to our Terms of Service and Privacy Policy
-            </StyledText>
-          </StyledView>
+            </Text>
+          </View>
               </>
             )}
-        </StyledScrollView>
-      </StyledSafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 };
@@ -428,22 +423,22 @@ interface BenefitItemProps {
 }
 
 const BenefitItem: React.FC<BenefitItemProps> = ({ emoji, text, compact = false }) => (
-  <StyledView 
+  <View 
     style={{
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: compact ? spacing[1] : spacing[3],
     }}
   >
-    <StyledText 
+    <Text 
       style={{
         fontSize: compact ? 16 : 20,
         marginRight: compact ? spacing[2] : spacing[3],
       }}
     >
       {emoji}
-    </StyledText>
-    <StyledText
+    </Text>
+    <Text
       style={{
         ...(compact ? textStyles.bodySmall : textStyles.body),
         color: colors.foreground.muted,
@@ -451,6 +446,6 @@ const BenefitItem: React.FC<BenefitItemProps> = ({ emoji, text, compact = false 
       }}
     >
       {text}
-    </StyledText>
-  </StyledView>
+    </Text>
+  </View>
 );

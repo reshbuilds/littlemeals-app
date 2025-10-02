@@ -10,15 +10,10 @@ import {
   TextStyle,
   TextInputProps,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { colors } from '../../constants/colors';
 import { spacing, dimensions, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledTextInput = styled(TextInput);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export type InputVariant = 'default' | 'search' | 'autocomplete';
 export type InputSize = 'small' | 'medium' | 'large';
@@ -279,26 +274,26 @@ export const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <StyledView style={[getContainerStyles(), containerStyle]}>
+    <View style={[getContainerStyles(), containerStyle]}>
       {/* Label */}
       {label && (
-        <StyledText style={getLabelStyles()}>
+        <Text style={getLabelStyles()}>
           {label}
-          {required && <StyledText style={{ color: colors.error.DEFAULT }}> *</StyledText>}
-        </StyledText>
+          {required && <Text style={{ color: colors.error.DEFAULT }}> *</Text>}
+        </Text>
       )}
 
       {/* Input Container */}
-      <StyledView style={[getInputContainerStyles(), inputStyle]}>
+      <View style={[getInputContainerStyles(), inputStyle]}>
         {/* Left Icon */}
         {leftIcon && (
-          <StyledView style={{ marginRight: spacing[1] }}>
+          <View style={{ marginRight: spacing[1] }}>
             {leftIcon}
-          </StyledView>
+          </View>
         )}
 
         {/* Text Input */}
-        <StyledTextInput
+        <TextInput
           ref={inputRef}
           style={[getInputTextStyles(), textStyle]}
           value={value}
@@ -321,15 +316,15 @@ export const Input: React.FC<InputProps> = ({
 
         {/* Right Icon */}
         {rightIcon && (
-          <StyledView style={{ marginLeft: spacing[1] }}>
+          <View style={{ marginLeft: spacing[1] }}>
             {rightIcon}
-          </StyledView>
+          </View>
         )}
-      </StyledView>
+      </View>
 
       {/* Autocomplete Options */}
       {variant === 'autocomplete' && showAutocomplete && filteredOptions.length > 0 && (
-        <StyledView
+        <View
           style={{
             position: 'absolute',
             top: '100%',
@@ -348,7 +343,7 @@ export const Input: React.FC<InputProps> = ({
             data={filteredOptions}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <StyledTouchableOpacity
+              <TouchableOpacity
                 style={{
                   padding: spacing[2],
                   borderBottomWidth: 1,
@@ -358,28 +353,28 @@ export const Input: React.FC<InputProps> = ({
                 accessibilityRole="button"
                 accessibilityLabel={`Select ${item.label}`}
               >
-                <StyledText style={textStyles.body}>
+                <Text style={textStyles.body}>
                   {item.label}
-                </StyledText>
+                </Text>
                 {item.subtitle && (
-                  <StyledText style={[textStyles.caption, { color: colors.foreground.muted }]}>
+                  <Text style={[textStyles.caption, { color: colors.foreground.muted }]}>
                     {item.subtitle}
-                  </StyledText>
+                  </Text>
                 )}
-              </StyledTouchableOpacity>
+              </TouchableOpacity>
             )}
             showsVerticalScrollIndicator={false}
           />
-        </StyledView>
+        </View>
       )}
 
       {/* Helper Text / Error */}
       {(helperText || error) && (
-        <StyledText style={getHelperTextStyles()}>
+        <Text style={getHelperTextStyles()}>
           {error || helperText}
-        </StyledText>
+        </Text>
       )}
-    </StyledView>
+    </View>
   );
 };
 

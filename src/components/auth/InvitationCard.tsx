@@ -4,15 +4,11 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { PrimaryButton, SecondaryButton } from '../design-system/Button';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export interface FamilyInvitation {
   id: string;
@@ -79,7 +75,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
   };
 
   return (
-    <StyledView
+    <View
       style={{
         backgroundColor: colors.background.card,
         borderRadius: borderRadius.base,
@@ -98,16 +94,16 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
       }}
     >
       {/* Family Info Header */}
-      <StyledView style={{ marginBottom: spacing[3] }}>
-        <StyledView
+      <View style={{ marginBottom: spacing[3] }}>
+        <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
             marginBottom: spacing[1],
           }}
         >
-          <StyledText style={{ fontSize: 24, marginRight: spacing[2] }}>👨‍👩‍👧‍👦</StyledText>
-          <StyledText
+          <Text style={{ fontSize: 24, marginRight: spacing[2] }}>👨‍👩‍👧‍👦</Text>
+          <Text
             style={{
               ...textStyles.h4,
               color: colors.foreground.DEFAULT,
@@ -115,9 +111,9 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
             }}
           >
             {invitation.familyName}
-          </StyledText>
+          </Text>
           {isExpired && (
-            <StyledView
+            <View
               style={{
                 backgroundColor: colors.error.light,
                 paddingHorizontal: spacing[2],
@@ -125,19 +121,19 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
                 borderRadius: borderRadius.base,
               }}
             >
-              <StyledText
+              <Text
                 style={{
                   ...textStyles.caption,
                   color: colors.error.foreground,
                 }}
               >
                 Expired
-              </StyledText>
-            </StyledView>
+              </Text>
+            </View>
           )}
-        </StyledView>
+        </View>
 
-        <StyledText
+        <Text
           style={{
             ...textStyles.body,
             color: colors.foreground.muted,
@@ -145,10 +141,10 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
           }}
         >
           Invited by {invitation.inviterName}
-        </StyledText>
+        </Text>
 
         {invitation.inviterEmail && (
-          <StyledText
+          <Text
             style={{
               ...textStyles.caption,
               color: colors.foreground.light,
@@ -156,10 +152,10 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
             }}
           >
             {invitation.inviterEmail}
-          </StyledText>
+          </Text>
         )}
 
-        <StyledText
+        <Text
           style={{
             ...textStyles.caption,
             color: colors.foreground.light,
@@ -169,11 +165,11 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
           {invitation.childrenCount && invitation.childrenCount > 0 && (
             ` • ${invitation.childrenCount} ${invitation.childrenCount === 1 ? 'child' : 'children'}`
           )}
-        </StyledText>
-      </StyledView>
+        </Text>
+      </View>
 
       {/* Invitation Message */}
-      <StyledView
+      <View
         style={{
           backgroundColor: colors.primary.light,
           padding: spacing[3],
@@ -181,7 +177,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
           marginBottom: spacing[4],
         }}
       >
-        <StyledText
+        <Text
           style={{
             ...textStyles.body,
             color: colors.foreground.DEFAULT,
@@ -189,18 +185,18 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
           }}
         >
           You've been invited to join this family and help track their meals together!
-        </StyledText>
-      </StyledView>
+        </Text>
+      </View>
 
       {/* Action Buttons */}
       {!isExpired && (
-        <StyledView
+        <View
           style={{
             flexDirection: 'row',
             gap: spacing[3],
           }}
         >
-          <StyledView style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
             <SecondaryButton
               onPress={() => onDecline?.(invitation)}
               loading={declineLoading}
@@ -210,8 +206,8 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
             >
               Decline
             </SecondaryButton>
-          </StyledView>
-          <StyledView style={{ flex: 1 }}>
+          </View>
+          <View style={{ flex: 1 }}>
             <PrimaryButton
               onPress={() => onAccept?.(invitation)}
               loading={acceptLoading}
@@ -221,12 +217,12 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
             >
               Accept
             </PrimaryButton>
-          </StyledView>
-        </StyledView>
+          </View>
+        </View>
       )}
 
       {isExpired && (
-        <StyledView
+        <View
           style={{
             padding: spacing[3],
             backgroundColor: colors.background.muted,
@@ -234,7 +230,7 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
             alignItems: 'center',
           }}
         >
-          <StyledText
+          <Text
             style={{
               ...textStyles.body,
               color: colors.foreground.muted,
@@ -242,9 +238,9 @@ export const InvitationCard: React.FC<InvitationCardProps> = ({
             }}
           >
             This invitation has expired. Please ask for a new invitation.
-          </StyledText>
-        </StyledView>
+          </Text>
+        </View>
       )}
-    </StyledView>
+    </View>
   );
 };

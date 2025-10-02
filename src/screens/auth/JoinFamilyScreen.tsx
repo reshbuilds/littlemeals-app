@@ -9,18 +9,12 @@ import {
   Alert,
   Dimensions,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { InvitationCard, FamilyInvitation } from '../../components/auth/InvitationCard';
 import { PrimaryButton, SecondaryButton } from '../../components/design-system/Button';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
 import { textStyles, responsiveTextStyles } from '../../constants/typography';
 
-const StyledSafeAreaView = styled(SafeAreaView);
-const StyledScrollView = styled(ScrollView);
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTextInput = styled(TextInput);
 
 export interface JoinFamilyScreenProps {
   /**
@@ -173,13 +167,13 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
         backgroundColor={colors.background.DEFAULT}
         barStyle="dark-content"
       />
-      <StyledSafeAreaView 
+      <SafeAreaView 
         style={{ 
           flex: 1, 
           backgroundColor: colors.background.DEFAULT 
         }}
       >
-        <StyledScrollView
+        <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
             paddingHorizontal: isLandscape ? spacing[6] : spacing[4],
@@ -189,8 +183,8 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
           keyboardShouldPersistTaps="handled"
         >
           {/* Header */}
-          <StyledView style={{ marginBottom: isLandscape ? spacing[4] : spacing[6] }}>
-            <StyledText
+          <View style={{ marginBottom: isLandscape ? spacing[4] : spacing[6] }}>
+            <Text
               style={{
                 ...(isLandscape ? textStyles.h2 : responsiveTextStyles.screenTitle),
                 color: colors.foreground.DEFAULT,
@@ -199,8 +193,8 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
               }}
             >
               Join a Family
-            </StyledText>
-            <StyledText
+            </Text>
+            <Text
               style={{
                 ...(isLandscape ? textStyles.bodySmall : textStyles.body),
                 color: colors.foreground.muted,
@@ -210,13 +204,13 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
               }}
             >
               Join an existing family to start tracking meals together
-            </StyledText>
-          </StyledView>
+            </Text>
+          </View>
 
           {/* Main Content - Responsive Layout */}
           {isLandscape && pendingInvitations.length > 0 ? (
             // Landscape Layout with Invitations: Side-by-side
-            <StyledView 
+            <View 
               style={{
                 flexDirection: 'row',
                 gap: spacing[6],
@@ -225,8 +219,8 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
               }}
             >
               {/* Left Side: Pending Invitations */}
-              <StyledView style={{ flex: 1 }}>
-                <StyledText
+              <View style={{ flex: 1 }}>
+                <Text
                   style={{
                     ...textStyles.h4,
                     color: colors.foreground.DEFAULT,
@@ -234,9 +228,9 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                   }}
                 >
                   Pending Invitations
-                </StyledText>
+                </Text>
                 
-                <StyledView style={{ gap: spacing[3] }}>
+                <View style={{ gap: spacing[3] }}>
                   {pendingInvitations.map((invitation) => (
                     <InvitationCard
                       key={invitation.id}
@@ -248,12 +242,12 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                       disabled={acceptingInvitation !== null || decliningInvitation !== null}
                     />
                   ))}
-                </StyledView>
-              </StyledView>
+                </View>
+              </View>
 
               {/* Right Side: Invite Code */}
-              <StyledView style={{ flex: 1 }}>
-                <StyledText
+              <View style={{ flex: 1 }}>
+                <Text
                   style={{
                     ...textStyles.h4,
                     color: colors.foreground.DEFAULT,
@@ -261,10 +255,10 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                   }}
                 >
                   Enter Invite Code
-                </StyledText>
+                </Text>
 
-                <StyledView style={{ marginBottom: spacing[4] }}>
-                  <StyledText
+                <View style={{ marginBottom: spacing[4] }}>
+                  <Text
                     style={{
                       ...textStyles.label,
                       color: colors.foreground.DEFAULT,
@@ -272,8 +266,8 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                     }}
                   >
                     Family Invite Code
-                  </StyledText>
-                  <StyledTextInput
+                  </Text>
+                  <TextInput
                     value={inviteCode}
                     onChangeText={(text) => {
                       setInviteCode(text);
@@ -304,7 +298,7 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                     autoCorrect={false}
                   />
                   {codeError && (
-                    <StyledText
+                    <Text
                       style={{
                         ...textStyles.caption,
                         color: colors.error.DEFAULT,
@@ -313,9 +307,9 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                       }}
                     >
                       {codeError}
-                    </StyledText>
+                    </Text>
                   )}
-                </StyledView>
+                </View>
 
                 <PrimaryButton
                   onPress={handleJoinWithCode}
@@ -327,15 +321,15 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                 >
                   Join Family
                 </PrimaryButton>
-              </StyledView>
-            </StyledView>
+              </View>
+            </View>
           ) : (
             // Portrait Layout or No Invitations: Original vertical layout
             <>
               {/* Pending Invitations Section */}
               {pendingInvitations.length > 0 && (
-                <StyledView style={{ marginBottom: isLandscape ? spacing[4] : spacing[6] }}>
-                  <StyledText
+                <View style={{ marginBottom: isLandscape ? spacing[4] : spacing[6] }}>
+                  <Text
                     style={{
                       ...textStyles.h4,
                       color: colors.foreground.DEFAULT,
@@ -343,9 +337,9 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                     }}
                   >
                     Pending Invitations
-                  </StyledText>
+                  </Text>
                   
-                  <StyledView style={{ gap: spacing[4] }}>
+                  <View style={{ gap: spacing[4] }}>
                     {pendingInvitations.map((invitation) => (
                       <InvitationCard
                         key={invitation.id}
@@ -357,27 +351,27 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                         disabled={acceptingInvitation !== null || decliningInvitation !== null}
                       />
                     ))}
-                  </StyledView>
-                </StyledView>
+                  </View>
+                </View>
               )}
 
               {/* Divider */}
               {pendingInvitations.length > 0 && (
-                <StyledView 
+                <View 
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',
                     marginBottom: isLandscape ? spacing[4] : spacing[6],
                   }}
                 >
-                  <StyledView 
+                  <View 
                     style={{
                       flex: 1,
                       height: 1,
                       backgroundColor: colors.border.DEFAULT,
                     }}
                   />
-                  <StyledText
+                  <Text
                     style={{
                       ...(isLandscape ? textStyles.bodySmall : textStyles.body),
                       color: colors.foreground.muted,
@@ -385,20 +379,20 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                     }}
                   >
                     or use invite code
-                  </StyledText>
-                  <StyledView 
+                  </Text>
+                  <View 
                     style={{
                       flex: 1,
                       height: 1,
                       backgroundColor: colors.border.DEFAULT,
                     }}
                   />
-                </StyledView>
+                </View>
               )}
 
               {/* Invite Code Section */}
-              <StyledView style={{ marginBottom: isLandscape ? spacing[4] : spacing[8] }}>
-                <StyledText
+              <View style={{ marginBottom: isLandscape ? spacing[4] : spacing[8] }}>
+                <Text
                   style={{
                     ...textStyles.h4,
                     color: colors.foreground.DEFAULT,
@@ -407,10 +401,10 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                   }}
                 >
                   Enter Invite Code
-                </StyledText>
+                </Text>
 
-                <StyledView style={{ marginBottom: spacing[4] }}>
-                  <StyledText
+                <View style={{ marginBottom: spacing[4] }}>
+                  <Text
                     style={{
                       ...textStyles.label,
                       color: colors.foreground.DEFAULT,
@@ -418,8 +412,8 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                     }}
                   >
                     Family Invite Code
-                  </StyledText>
-                  <StyledTextInput
+                  </Text>
+                  <TextInput
                     value={inviteCode}
                     onChangeText={(text) => {
                       setInviteCode(text);
@@ -450,7 +444,7 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                     autoCorrect={false}
                   />
                   {codeError && (
-                    <StyledText
+                    <Text
                       style={{
                         ...textStyles.caption,
                         color: colors.error.DEFAULT,
@@ -459,9 +453,9 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                       }}
                     >
                       {codeError}
-                    </StyledText>
+                    </Text>
                   )}
-                </StyledView>
+                </View>
 
                 <PrimaryButton
                   onPress={handleJoinWithCode}
@@ -473,12 +467,12 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
                 >
                   Join Family
                 </PrimaryButton>
-              </StyledView>
+              </View>
             </>
           )}
 
           {/* Alternative Action */}
-          <StyledView style={{ marginTop: 'auto', paddingBottom: isLandscape ? spacing[2] : spacing[4] }}>
+          <View style={{ marginTop: 'auto', paddingBottom: isLandscape ? spacing[2] : spacing[4] }}>
             <SecondaryButton
               onPress={onCreateNewFamily}
               disabled={loading || acceptingInvitation !== null || decliningInvitation !== null}
@@ -488,9 +482,9 @@ export const JoinFamilyScreen: React.FC<JoinFamilyScreenProps> = ({
             >
               Create New Family Instead
             </SecondaryButton>
-          </StyledView>
-        </StyledScrollView>
-      </StyledSafeAreaView>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 };

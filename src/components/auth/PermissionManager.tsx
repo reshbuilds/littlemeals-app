@@ -6,14 +6,9 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
-const StyledScrollView = styled(ScrollView);
 
 export type FamilyRole = 'admin' | 'caregiver' | 'viewer';
 
@@ -208,7 +203,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
   const renderRoleBadge = (role: FamilyRole) => {
     const config = roleDefinitions[role];
     return (
-      <StyledView
+      <View
         style={{
           backgroundColor: config.bgColor,
           paddingHorizontal: spacing[3],
@@ -218,10 +213,10 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
           alignItems: 'center',
         }}
       >
-        <StyledText style={{ fontSize: 14, marginRight: spacing[1] }}>
+        <Text style={{ fontSize: 14, marginRight: spacing[1] }}>
           {config.emoji}
-        </StyledText>
-        <StyledText
+        </Text>
+        <Text
           style={{
             fontSize: 12,
             color: config.color,
@@ -229,8 +224,8 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
           }}
         >
           {config.label}
-        </StyledText>
-      </StyledView>
+        </Text>
+      </View>
     );
   };
 
@@ -240,7 +235,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
     const isChangingRole = changingRoleForMember === member.id;
 
     return (
-      <StyledView
+      <View
         key={member.id}
         style={{
           backgroundColor: colors.background.card,
@@ -253,7 +248,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
         }}
       >
         {/* Member Header */}
-        <StyledView
+        <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
@@ -261,7 +256,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
           }}
         >
           {/* Avatar */}
-          <StyledView
+          <View
             style={{
               width: 50,
               height: 50,
@@ -272,21 +267,21 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               marginRight: spacing[3],
             }}
           >
-            <StyledText style={{ fontSize: 20 }}>
+            <Text style={{ fontSize: 20 }}>
               {member.avatar || '👤'}
-            </StyledText>
-          </StyledView>
+            </Text>
+          </View>
 
           {/* Member Info */}
-          <StyledView style={{ flex: 1 }}>
-            <StyledView
+          <View style={{ flex: 1 }}>
+            <View
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
                 marginBottom: spacing[1],
               }}
             >
-              <StyledText
+              <Text
                 style={{
                   fontSize: 18, fontWeight: '600',
                   color: colors.foreground.DEFAULT,
@@ -295,19 +290,19 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               >
                 {member.name}
                 {member.isCurrentUser && ' (You)'}
-              </StyledText>
+              </Text>
               {renderRoleBadge(member.role)}
-            </StyledView>
-            <StyledText
+            </View>
+            <Text
               style={{
                 fontSize: 16,
                 color: colors.foreground.muted,
               }}
             >
               {member.email}
-            </StyledText>
+            </Text>
             {member.joinedAt && (
-              <StyledText
+              <Text
                 style={{
                   fontSize: 12,
                   color: colors.foreground.light,
@@ -315,15 +310,15 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
                 }}
               >
                 Joined {member.joinedAt.toLocaleDateString()}
-              </StyledText>
+              </Text>
             )}
-          </StyledView>
-        </StyledView>
+          </View>
+        </View>
 
         {/* Role Management (only for admins) */}
         {canManage && (
-          <StyledView>
-            <StyledText
+          <View>
+            <Text
               style={{
                 fontSize: 14, fontWeight: '500',
                 color: colors.foreground.muted,
@@ -331,9 +326,9 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               }}
             >
               Change Role
-            </StyledText>
+            </Text>
             
-            <StyledView
+            <View
               style={{
                 flexDirection: 'row',
                 gap: spacing[2],
@@ -341,7 +336,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               }}
             >
               {(Object.keys(roleDefinitions) as FamilyRole[]).map((role) => (
-                <StyledTouchableOpacity
+                <TouchableOpacity
                   key={role}
                   onPress={() => handleRoleChange(member.id, role)}
                   disabled={member.role === role || isChangingRole || loading}
@@ -363,10 +358,10 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
                   accessibilityLabel={`Change role to ${roleDefinitions[role].label}`}
                   accessibilityRole="button"
                 >
-                  <StyledText style={{ fontSize: 16, marginBottom: spacing[1] }}>
+                  <Text style={{ fontSize: 16, marginBottom: spacing[1] }}>
                     {roleDefinitions[role].emoji}
-                  </StyledText>
-                  <StyledText
+                  </Text>
+                  <Text
                     style={{
                       fontSize: 12,
                       color: member.role === role 
@@ -376,13 +371,13 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
                     }}
                   >
                     {roleDefinitions[role].label}
-                  </StyledText>
-                </StyledTouchableOpacity>
+                  </Text>
+                </TouchableOpacity>
               ))}
-            </StyledView>
+            </View>
 
             {/* Remove Member Button */}
-            <StyledTouchableOpacity
+            <TouchableOpacity
               onPress={() => handleRemoveMember(member.id)}
               disabled={loading || isChangingRole}
               style={{
@@ -392,21 +387,21 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               accessibilityLabel={`Remove ${member.name} from family`}
               accessibilityRole="button"
             >
-              <StyledText
+              <Text
                 style={{
                   fontSize: 12,
                   color: colors.error.DEFAULT,
                 }}
               >
                 Remove from Family
-              </StyledText>
-            </StyledTouchableOpacity>
-          </StyledView>
+              </Text>
+            </TouchableOpacity>
+          </View>
         )}
 
         {/* Loading State */}
         {isChangingRole && (
-          <StyledView
+          <View
             style={{
               marginTop: spacing[2],
               padding: spacing[2],
@@ -415,17 +410,17 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               alignItems: 'center',
             }}
           >
-            <StyledText
+            <Text
               style={{
                 fontSize: 12,
                 color: colors.foreground.muted,
               }}
             >
               Updating role...
-            </StyledText>
-          </StyledView>
+            </Text>
+          </View>
         )}
-      </StyledView>
+      </View>
     );
   };
 
@@ -435,7 +430,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
     const isExpanded = expandedRole === role;
 
     return (
-      <StyledView
+      <View
         key={role}
         style={{
           backgroundColor: colors.background.card,
@@ -445,7 +440,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
           borderColor: colors.border.DEFAULT,
         }}
       >
-        <StyledTouchableOpacity
+        <TouchableOpacity
           onPress={() => setExpandedRole(isExpanded ? null : role)}
           style={{
             padding: spacing[3],
@@ -456,12 +451,12 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
           accessibilityLabel={`${config.label} role information`}
           accessibilityRole="button"
         >
-          <StyledView style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
-            <StyledText style={{ fontSize: 20, marginRight: spacing[2] }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
+            <Text style={{ fontSize: 20, marginRight: spacing[2] }}>
               {config.emoji}
-            </StyledText>
-            <StyledView style={{ flex: 1 }}>
-              <StyledText
+            </Text>
+            <View style={{ flex: 1 }}>
+              <Text
                 style={{
                   fontSize: 18, fontWeight: '600',
                   color: colors.foreground.DEFAULT,
@@ -469,18 +464,18 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
                 }}
               >
                 {config.label}
-              </StyledText>
-              <StyledText
+              </Text>
+              <Text
                 style={{
                   fontSize: 16,
                   color: colors.foreground.muted,
                 }}
               >
                 {config.description}
-              </StyledText>
-            </StyledView>
-          </StyledView>
-          <StyledText
+              </Text>
+            </View>
+          </View>
+          <Text
             style={{
               fontSize: 16,
               color: colors.foreground.light,
@@ -488,11 +483,11 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
             }}
           >
             ▼
-          </StyledText>
-        </StyledTouchableOpacity>
+          </Text>
+        </TouchableOpacity>
 
         {isExpanded && (
-          <StyledView
+          <View
             style={{
               paddingHorizontal: spacing[3],
               paddingBottom: spacing[3],
@@ -500,7 +495,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               borderTopColor: colors.border.light,
             }}
           >
-            <StyledText
+            <Text
               style={{
                 fontSize: 14, fontWeight: '500',
                 color: colors.foreground.muted,
@@ -509,9 +504,9 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               }}
             >
               Permissions:
-            </StyledText>
+            </Text>
             {config.permissions.map((permission, index) => (
-              <StyledView
+              <View
                 key={index}
                 style={{
                   flexDirection: 'row',
@@ -519,7 +514,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
                   marginBottom: spacing[1],
                 }}
               >
-                <StyledText
+                <Text
                   style={{
                     fontSize: 12,
                     color: colors.success.DEFAULT,
@@ -527,35 +522,35 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
                   }}
                 >
                   ✓
-                </StyledText>
-                <StyledText
+                </Text>
+                <Text
                   style={{
                     fontSize: 16,
                     color: colors.foreground.DEFAULT,
                   }}
                 >
                   {permission}
-                </StyledText>
-              </StyledView>
+                </Text>
+              </View>
             ))}
-          </StyledView>
+          </View>
         )}
-      </StyledView>
+      </View>
     );
   };
 
   return (
-    <StyledScrollView
+    <ScrollView
       style={{
         flex: 1,
         backgroundColor: colors.background.DEFAULT,
       }}
       showsVerticalScrollIndicator={false}
     >
-      <StyledView style={{ padding: spacing[4] }}>
+      <View style={{ padding: spacing[4] }}>
         {/* Header */}
-        <StyledView style={{ marginBottom: spacing[6] }}>
-          <StyledText
+        <View style={{ marginBottom: spacing[6] }}>
+          <Text
             style={{
               fontSize: 24, fontWeight: 'bold',
               color: colors.foreground.DEFAULT,
@@ -564,8 +559,8 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
             }}
           >
             Family Permissions
-          </StyledText>
-          <StyledText
+          </Text>
+          <Text
             style={{
               fontSize: 16,
               color: colors.foreground.muted,
@@ -573,12 +568,12 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
             }}
           >
             Manage family member roles and permissions
-          </StyledText>
-        </StyledView>
+          </Text>
+        </View>
 
         {/* Role Explanations */}
-        <StyledView style={{ marginBottom: spacing[6] }}>
-          <StyledText
+        <View style={{ marginBottom: spacing[6] }}>
+          <Text
             style={{
               fontSize: 20, fontWeight: '600',
               color: colors.foreground.DEFAULT,
@@ -586,13 +581,13 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
             }}
           >
             Family Roles
-          </StyledText>
+          </Text>
           {(Object.keys(roleDefinitions) as FamilyRole[]).map(renderRoleExplanation)}
-        </StyledView>
+        </View>
 
         {/* Family Members */}
-        <StyledView>
-          <StyledText
+        <View>
+          <Text
             style={{
               fontSize: 20, fontWeight: '600',
               color: colors.foreground.DEFAULT,
@@ -600,13 +595,13 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
             }}
           >
             Family Members ({members.length})
-          </StyledText>
+          </Text>
           {members.map(renderMemberCard)}
-        </StyledView>
+        </View>
 
         {/* Admin Note */}
         {!isCurrentUserAdmin && (
-          <StyledView
+          <View
             style={{
               backgroundColor: colors.background.muted,
               padding: spacing[4],
@@ -614,7 +609,7 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               marginTop: spacing[4],
             }}
           >
-            <StyledText
+            <Text
               style={{
                 fontSize: 16,
                 color: colors.foreground.muted,
@@ -622,10 +617,10 @@ export const PermissionManager: React.FC<PermissionManagerProps> = ({
               }}
             >
               Only family admins can manage member roles and permissions.
-            </StyledText>
-          </StyledView>
+            </Text>
+          </View>
         )}
-      </StyledView>
-    </StyledScrollView>
+      </View>
+    </ScrollView>
   );
 };

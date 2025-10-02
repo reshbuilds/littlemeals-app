@@ -20,14 +20,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { styled } from 'nativewind';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export interface DatePickerProps {
   /**
@@ -162,14 +158,14 @@ const IOSDatePickerModal: React.FC<IOSDatePickerModalProps> = ({
       onRequestClose={onCancel}
       supportedOrientations={['portrait', 'landscape']}
     >
-      <StyledView
+      <View
         style={{
           flex: 1,
           justifyContent: 'flex-end',
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
         }}
       >
-        <StyledView
+        <View
           style={{
             backgroundColor: colors.background.DEFAULT,
             borderTopLeftRadius: borderRadius['2xl'],
@@ -178,7 +174,7 @@ const IOSDatePickerModal: React.FC<IOSDatePickerModalProps> = ({
           }}
         >
           {/* Header */}
-          <StyledView
+          <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
@@ -189,38 +185,38 @@ const IOSDatePickerModal: React.FC<IOSDatePickerModalProps> = ({
               borderBottomColor: colors.border.DEFAULT,
             }}
           >
-            <StyledTouchableOpacity
+            <TouchableOpacity
               onPress={onCancel}
               style={{ padding: spacing[1] }}
               accessibilityRole="button"
               accessibilityLabel="Cancel date selection"
             >
-              <StyledText
+              <Text
                 style={{
                   ...textStyles.body,
                   color: colors.primary.DEFAULT,
                 }}
               >
                 Cancel
-              </StyledText>
-            </StyledTouchableOpacity>
+              </Text>
+            </TouchableOpacity>
             
-            <StyledText
+            <Text
               style={{
                 ...textStyles.h4,
                 color: colors.foreground.DEFAULT,
               }}
             >
               Select Date
-            </StyledText>
+            </Text>
             
-            <StyledTouchableOpacity
+            <TouchableOpacity
               onPress={handleConfirm}
               style={{ padding: spacing[1] }}
               accessibilityRole="button"
               accessibilityLabel="Confirm date selection"
             >
-              <StyledText
+              <Text
                 style={{
                   ...textStyles.body,
                   fontWeight: '600',
@@ -228,12 +224,12 @@ const IOSDatePickerModal: React.FC<IOSDatePickerModalProps> = ({
                 }}
               >
                 Done
-              </StyledText>
-            </StyledTouchableOpacity>
-          </StyledView>
+              </Text>
+            </TouchableOpacity>
+          </View>
 
           {/* Date Picker */}
-          <StyledView
+          <View
             style={{
               paddingHorizontal: spacing[4],
               paddingVertical: spacing[2],
@@ -255,9 +251,9 @@ const IOSDatePickerModal: React.FC<IOSDatePickerModalProps> = ({
                 width: 320,
               }}
             />
-          </StyledView>
-        </StyledView>
-      </StyledView>
+          </View>
+        </View>
+      </View>
     </Modal>
   );
 };
@@ -317,9 +313,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   }, [onChange]);
 
   return (
-    <StyledView style={style} testID={testID}>
+    <View style={style} testID={testID}>
       {/* Date Display Button */}
-      <StyledTouchableOpacity
+      <TouchableOpacity
         onPress={handlePress}
         disabled={disabled}
         style={[
@@ -336,15 +332,15 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         accessibilityState={{ disabled }}
         testID={`${testID}-button`}
       >
-        <StyledText
+        <Text
           style={{
             ...textStyles.body,
             color: disabled ? colors.foreground.muted : colors.foreground.muted,
           }}
         >
           {formatDate(value)}
-        </StyledText>
-      </StyledTouchableOpacity>
+        </Text>
+      </TouchableOpacity>
 
       {/* Platform-specific Date Picker */}
       {Platform.OS === 'ios' && (
@@ -368,7 +364,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           maximumDate={maximumDate}
         />
       )}
-    </StyledView>
+    </View>
   );
 };
 
