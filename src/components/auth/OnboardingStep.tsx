@@ -4,15 +4,11 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { PrimaryButton, SecondaryButton } from '../design-system/Button';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export interface OnboardingStepProps {
   /**
@@ -103,9 +99,9 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
   isLandscape = false,
 }) => {
   return (
-    <StyledView style={{ flex: 1, paddingHorizontal: isLandscape ? spacing[6] : spacing[4] }}>
+    <View style={{ flex: 1, paddingHorizontal: isLandscape ? spacing[6] : spacing[4] }}>
       {/* Progress Indicator */}
-      <StyledView
+      <View
         style={{
           flexDirection: 'row',
           justifyContent: 'center',
@@ -115,7 +111,7 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
         }}
       >
         {Array.from({ length: totalSteps }, (_, index) => (
-          <StyledView
+          <View
             key={index}
             style={{
               width: 8,
@@ -128,11 +124,11 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
             }}
           />
         ))}
-      </StyledView>
+      </View>
 
       {isLandscape ? (
         // Landscape Layout: Side-by-side
-        <StyledView 
+        <View 
           style={{
             flex: 1,
             flexDirection: 'row',
@@ -141,9 +137,9 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
           }}
         >
           {/* Left Side: Content */}
-          <StyledView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             {/* Emoji/Icon */}
-            <StyledText 
+            <Text 
               style={{ 
                 fontSize: 60, 
                 marginBottom: spacing[4],
@@ -151,10 +147,10 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
               }}
             >
               {emoji}
-            </StyledText>
+            </Text>
 
             {/* Title */}
-            <StyledText
+            <Text
               style={{
                 ...textStyles.h2,
                 color: colors.foreground.DEFAULT,
@@ -163,10 +159,10 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
               }}
             >
               {title}
-            </StyledText>
+            </Text>
 
             {/* Description */}
-            <StyledText
+            <Text
               style={{
                 ...textStyles.body,
                 color: colors.foreground.muted,
@@ -177,20 +173,20 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
               }}
             >
               {description}
-            </StyledText>
-          </StyledView>
+            </Text>
+          </View>
 
           {/* Right Side: Demo Content or Actions */}
-          <StyledView style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
             {/* Demo Content */}
             {demoContent && (
-              <StyledView style={{ marginBottom: spacing[4], width: '100%' }}>
+              <View style={{ marginBottom: spacing[4], width: '100%' }}>
                 {demoContent}
-              </StyledView>
+              </View>
             )}
 
             {/* Action Buttons - Landscape */}
-            <StyledView style={{ gap: spacing[2] }}>
+            <View style={{ gap: spacing[2] }}>
               {/* Primary Action */}
               <PrimaryButton
                 onPress={onPrimaryAction}
@@ -218,7 +214,7 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
 
               {/* Skip Option */}
               {skipText && onSkip && (
-                <StyledTouchableOpacity
+                <TouchableOpacity
                   onPress={onSkip}
                   disabled={loading}
                   style={{
@@ -229,19 +225,19 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                   accessibilityLabel={skipText}
                   accessibilityRole="button"
                 >
-                  <StyledText
+                  <Text
                     style={{
                       ...textStyles.bodySmall,
                       color: colors.foreground.muted,
                     }}
                   >
                     {skipText}
-                  </StyledText>
-                </StyledTouchableOpacity>
+                  </Text>
+                </TouchableOpacity>
               )}
 
               {/* Step Counter */}
-              <StyledText
+              <Text
                 style={{
                   ...textStyles.caption,
                   color: colors.foreground.light,
@@ -250,17 +246,17 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                 }}
               >
                 {stepNumber} of {totalSteps}
-              </StyledText>
-            </StyledView>
-          </StyledView>
-        </StyledView>
+              </Text>
+            </View>
+          </View>
+        </View>
       ) : (
         // Portrait Layout: Original vertical layout
         <>
           {/* Main Content */}
-          <StyledView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             {/* Emoji/Icon */}
-            <StyledText 
+            <Text 
               style={{ 
                 fontSize: 80, 
                 marginBottom: spacing[6],
@@ -268,10 +264,10 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
               }}
             >
               {emoji}
-            </StyledText>
+            </Text>
 
             {/* Title */}
-            <StyledText
+            <Text
               style={{
                 ...textStyles.h1,
                 color: colors.foreground.DEFAULT,
@@ -280,10 +276,10 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
               }}
             >
               {title}
-            </StyledText>
+            </Text>
 
             {/* Description */}
-            <StyledText
+            <Text
               style={{
                 ...textStyles.bodyLarge,
                 color: colors.foreground.muted,
@@ -294,18 +290,18 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
               }}
             >
               {description}
-            </StyledText>
+            </Text>
 
             {/* Demo Content */}
             {demoContent && (
-              <StyledView style={{ marginBottom: spacing[8], width: '100%' }}>
+              <View style={{ marginBottom: spacing[8], width: '100%' }}>
                 {demoContent}
-              </StyledView>
+              </View>
             )}
-          </StyledView>
+          </View>
 
           {/* Action Buttons */}
-          <StyledView style={{ paddingBottom: spacing[6] }}>
+          <View style={{ paddingBottom: spacing[6] }}>
             {/* Primary Action */}
             <PrimaryButton
               onPress={onPrimaryAction}
@@ -320,7 +316,7 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
 
             {/* Secondary Action */}
             {secondaryActionText && onSecondaryAction && (
-              <StyledView style={{ marginTop: spacing[3] }}>
+              <View style={{ marginTop: spacing[3] }}>
                 <SecondaryButton
                   onPress={onSecondaryAction}
                   disabled={loading}
@@ -330,12 +326,12 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                 >
                   {secondaryActionText}
                 </SecondaryButton>
-              </StyledView>
+              </View>
             )}
 
             {/* Skip Option */}
             {skipText && onSkip && (
-              <StyledTouchableOpacity
+              <TouchableOpacity
                 onPress={onSkip}
                 disabled={loading}
                 style={{
@@ -346,19 +342,19 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
                 accessibilityLabel={skipText}
                 accessibilityRole="button"
               >
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.body,
                     color: colors.foreground.muted,
                   }}
                 >
                   {skipText}
-                </StyledText>
-              </StyledTouchableOpacity>
+                </Text>
+              </TouchableOpacity>
             )}
 
             {/* Step Counter */}
-            <StyledText
+            <Text
               style={{
                 ...textStyles.caption,
                 color: colors.foreground.light,
@@ -367,10 +363,10 @@ export const OnboardingStep: React.FC<OnboardingStepProps> = ({
               }}
             >
               {stepNumber} of {totalSteps}
-            </StyledText>
-          </StyledView>
+            </Text>
+          </View>
         </>
       )}
-    </StyledView>
+    </View>
   );
 };

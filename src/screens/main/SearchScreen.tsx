@@ -9,7 +9,6 @@ import {
   Platform,
   Keyboard
 } from 'react-native';
-import { styled } from 'nativewind';
 import { 
   Screen, 
   Container, 
@@ -56,9 +55,6 @@ const mockMessages: Message[] = [
   }
 ];
 
-const StyledScrollView = styled(ScrollView);
-const StyledTextInput = styled(TextInput);
-const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView);
 
 const SearchScreen = () => {
   const [messages, setMessages] = useState<Message[]>(mockMessages);
@@ -206,7 +202,7 @@ const SearchScreen = () => {
 
   return (
     <Screen>
-      <StyledKeyboardAvoidingView 
+      <KeyboardAvoidingView 
         className="flex-1" 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
@@ -225,7 +221,7 @@ const SearchScreen = () => {
         </Container>
 
         {/* Chat Messages */}
-        <StyledScrollView 
+        <ScrollView 
           ref={scrollViewRef}
           className="flex-1"
           showsVerticalScrollIndicator={false}
@@ -276,14 +272,14 @@ const SearchScreen = () => {
               )}
             </VStack>
           </Container>
-        </StyledScrollView>
+        </ScrollView>
 
         {/* Input Area */}
         <Container>
           <VStack space={3} className="py-4 border-t border-border">
             <HStack space={3} className="items-end">
               <View className="flex-1">
-                <StyledTextInput
+                <TextInput
                   ref={inputRef}
                   value={inputText}
                   onChangeText={setInputText}
@@ -335,7 +331,7 @@ const SearchScreen = () => {
             </HStack>
           </VStack>
         </Container>
-      </StyledKeyboardAvoidingView>
+      </KeyboardAvoidingView>
     </Screen>
   );
 };

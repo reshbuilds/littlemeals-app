@@ -11,16 +11,12 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { OAuthButton } from './OAuthButton';
 import { ChildProfileCard } from '../family/ChildProfileCard';
 import { colors } from '../../constants/colors';
 import { spacing, dimensions } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledScrollView = styled(ScrollView);
 
 /**
  * DESIGN VERIFICATION CHECKLIST
@@ -61,13 +57,13 @@ const StyledScrollView = styled(ScrollView);
 
 export const AuthDesignVerification: React.FC = () => {
   return (
-    <StyledScrollView
+    <ScrollView
       style={{ flex: 1, backgroundColor: colors.background.DEFAULT }}
       contentContainerStyle={{ padding: spacing[4] }}
     >
       {/* Touch Target Verification */}
-      <StyledView style={{ marginBottom: spacing[6] }}>
-        <StyledText
+      <View style={{ marginBottom: spacing[6] }}>
+        <Text
           style={{
             ...textStyles.h3,
             color: colors.foreground.DEFAULT,
@@ -75,25 +71,25 @@ export const AuthDesignVerification: React.FC = () => {
           }}
         >
           ✅ Touch Target Verification (44px minimum)
-        </StyledText>
+        </Text>
         
         {/* OAuth Buttons - 56px height */}
-        <StyledView style={{ marginBottom: spacing[4] }}>
-          <StyledText style={{ ...textStyles.label, marginBottom: spacing[2] }}>
+        <View style={{ marginBottom: spacing[4] }}>
+          <Text style={{ ...textStyles.label, marginBottom: spacing[2] }}>
             OAuth Buttons: {dimensions.buttonLarge}px height
-          </StyledText>
+          </Text>
           <OAuthButton
             provider="google"
             onPress={() => {}}
           />
-        </StyledView>
+        </View>
 
         {/* Standard Buttons - 44px minimum */}
-        <StyledView style={{ marginBottom: spacing[4] }}>
-          <StyledText style={{ ...textStyles.label, marginBottom: spacing[2] }}>
+        <View style={{ marginBottom: spacing[4] }}>
+          <Text style={{ ...textStyles.label, marginBottom: spacing[2] }}>
             Standard Buttons: {dimensions.buttonMedium}px height
-          </StyledText>
-          <StyledView
+          </Text>
+          <View
             style={{
               height: dimensions.buttonMedium,
               backgroundColor: colors.primary.DEFAULT,
@@ -102,16 +98,16 @@ export const AuthDesignVerification: React.FC = () => {
               alignItems: 'center',
             }}
           >
-            <StyledText style={{ color: colors.primary.foreground }}>
+            <Text style={{ color: colors.primary.foreground }}>
               Standard Button (44px)
-            </StyledText>
-          </StyledView>
-        </StyledView>
-      </StyledView>
+            </Text>
+          </View>
+        </View>
+      </View>
 
       {/* Visual Hierarchy Verification */}
-      <StyledView style={{ marginBottom: spacing[6] }}>
-        <StyledText
+      <View style={{ marginBottom: spacing[6] }}>
+        <Text
           style={{
             ...textStyles.h3,
             color: colors.foreground.DEFAULT,
@@ -119,9 +115,9 @@ export const AuthDesignVerification: React.FC = () => {
           }}
         >
           ✅ Visual Hierarchy Examples
-        </StyledText>
+        </Text>
         
-        <StyledView
+        <View
           style={{
             backgroundColor: colors.background.card,
             padding: spacing[4],
@@ -129,33 +125,33 @@ export const AuthDesignVerification: React.FC = () => {
             gap: spacing[3],
           }}
         >
-          <StyledText style={{ ...textStyles.h1, color: colors.foreground.DEFAULT }}>
+          <Text style={{ ...textStyles.h1, color: colors.foreground.DEFAULT }}>
             H1 - Main Titles
-          </StyledText>
-          <StyledText style={{ ...textStyles.h2, color: colors.foreground.DEFAULT }}>
+          </Text>
+          <Text style={{ ...textStyles.h2, color: colors.foreground.DEFAULT }}>
             H2 - Section Headers
-          </StyledText>
-          <StyledText style={{ ...textStyles.h3, color: colors.foreground.DEFAULT }}>
+          </Text>
+          <Text style={{ ...textStyles.h3, color: colors.foreground.DEFAULT }}>
             H3 - Subsection Headers
-          </StyledText>
-          <StyledText style={{ ...textStyles.h4, color: colors.foreground.DEFAULT }}>
+          </Text>
+          <Text style={{ ...textStyles.h4, color: colors.foreground.DEFAULT }}>
             H4 - Card Titles
-          </StyledText>
-          <StyledText style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
+          </Text>
+          <Text style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
             Body - Primary content text
-          </StyledText>
-          <StyledText style={{ ...textStyles.body, color: colors.foreground.muted }}>
+          </Text>
+          <Text style={{ ...textStyles.body, color: colors.foreground.muted }}>
             Body Muted - Secondary content
-          </StyledText>
-          <StyledText style={{ ...textStyles.caption, color: colors.foreground.light }}>
+          </Text>
+          <Text style={{ ...textStyles.caption, color: colors.foreground.light }}>
             Caption - Helper text and metadata
-          </StyledText>
-        </StyledView>
-      </StyledView>
+          </Text>
+        </View>
+      </View>
 
       {/* Color Contrast Verification */}
-      <StyledView style={{ marginBottom: spacing[6] }}>
-        <StyledText
+      <View style={{ marginBottom: spacing[6] }}>
+        <Text
           style={{
             ...textStyles.h3,
             color: colors.foreground.DEFAULT,
@@ -163,24 +159,24 @@ export const AuthDesignVerification: React.FC = () => {
           }}
         >
           ✅ Color Contrast (WCAG AA Compliant)
-        </StyledText>
+        </Text>
         
-        <StyledView style={{ gap: spacing[2] }}>
+        <View style={{ gap: spacing[2] }}>
           {/* Primary Button */}
-          <StyledView
+          <View
             style={{
               backgroundColor: colors.primary.DEFAULT,
               padding: spacing[3],
               borderRadius: 8,
             }}
           >
-            <StyledText style={{ color: colors.primary.foreground }}>
+            <Text style={{ color: colors.primary.foreground }}>
               Primary Button Text (High Contrast)
-            </StyledText>
-          </StyledView>
+            </Text>
+          </View>
 
           {/* Secondary Button */}
-          <StyledView
+          <View
             style={{
               backgroundColor: colors.background.card,
               borderWidth: 1,
@@ -189,29 +185,29 @@ export const AuthDesignVerification: React.FC = () => {
               borderRadius: 8,
             }}
           >
-            <StyledText style={{ color: colors.foreground.DEFAULT }}>
+            <Text style={{ color: colors.foreground.DEFAULT }}>
               Secondary Button Text (High Contrast)
-            </StyledText>
-          </StyledView>
+            </Text>
+          </View>
 
           {/* Error State */}
-          <StyledView
+          <View
             style={{
               backgroundColor: colors.error.light,
               padding: spacing[3],
               borderRadius: 8,
             }}
           >
-            <StyledText style={{ color: colors.error.foreground }}>
+            <Text style={{ color: colors.error.foreground }}>
               Error Message Text (High Contrast)
-            </StyledText>
-          </StyledView>
-        </StyledView>
-      </StyledView>
+            </Text>
+          </View>
+        </View>
+      </View>
 
       {/* Family-Friendly Design Elements */}
-      <StyledView style={{ marginBottom: spacing[6] }}>
-        <StyledText
+      <View style={{ marginBottom: spacing[6] }}>
+        <Text
           style={{
             ...textStyles.h3,
             color: colors.foreground.DEFAULT,
@@ -219,9 +215,9 @@ export const AuthDesignVerification: React.FC = () => {
           }}
         >
           ✅ Family-Friendly Design Elements
-        </StyledText>
+        </Text>
         
-        <StyledView
+        <View
           style={{
             backgroundColor: colors.background.card,
             padding: spacing[4],
@@ -230,8 +226,8 @@ export const AuthDesignVerification: React.FC = () => {
             gap: spacing[3],
           }}
         >
-          <StyledText style={{ fontSize: 48 }}>👨‍👩‍👧‍👦</StyledText>
-          <StyledText
+          <Text style={{ fontSize: 48 }}>👨‍👩‍👧‍👦</Text>
+          <Text
             style={{
               ...textStyles.h4,
               color: colors.foreground.DEFAULT,
@@ -239,8 +235,8 @@ export const AuthDesignVerification: React.FC = () => {
             }}
           >
             Warm, Welcoming Emojis
-          </StyledText>
-          <StyledText
+          </Text>
+          <Text
             style={{
               ...textStyles.body,
               color: colors.foreground.muted,
@@ -248,13 +244,13 @@ export const AuthDesignVerification: React.FC = () => {
             }}
           >
             Clear, simple language that parents can quickly understand during busy meal times
-          </StyledText>
-        </StyledView>
-      </StyledView>
+          </Text>
+        </View>
+      </View>
 
       {/* Accessibility Features Summary */}
-      <StyledView>
-        <StyledText
+      <View>
+        <Text
           style={{
             ...textStyles.h3,
             color: colors.foreground.DEFAULT,
@@ -262,9 +258,9 @@ export const AuthDesignVerification: React.FC = () => {
           }}
         >
           ✅ Accessibility Features
-        </StyledText>
+        </Text>
         
-        <StyledView
+        <View
           style={{
             backgroundColor: colors.primary.light,
             padding: spacing[4],
@@ -272,26 +268,26 @@ export const AuthDesignVerification: React.FC = () => {
             gap: spacing[2],
           }}
         >
-          <StyledText style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
+          <Text style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
             • Screen reader labels on all interactive elements
-          </StyledText>
-          <StyledText style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
+          </Text>
+          <Text style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
             • Semantic roles for proper navigation
-          </StyledText>
-          <StyledText style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
+          </Text>
+          <Text style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
             • Loading states with progress indicators
-          </StyledText>
-          <StyledText style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
+          </Text>
+          <Text style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
             • Clear error messaging with retry options
-          </StyledText>
-          <StyledText style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
+          </Text>
+          <Text style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
             • Large touch targets (44px+ minimum)
-          </StyledText>
-          <StyledText style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
+          </Text>
+          <Text style={{ ...textStyles.body, color: colors.foreground.DEFAULT }}>
             • High contrast color combinations
-          </StyledText>
-        </StyledView>
-      </StyledView>
-    </StyledScrollView>
+          </Text>
+        </View>
+      </View>
+    </ScrollView>
   );
 };

@@ -5,13 +5,10 @@ import {
   StatusBar,
   Alert,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { AuthLoadingState } from '../../components/auth/AuthLoadingState';
 import { AuthErrorState, AuthErrorType } from '../../components/auth/AuthErrorState';
 import { colors } from '../../constants/colors';
 
-const StyledSafeAreaView = styled(SafeAreaView);
-const StyledView = styled(View);
 
 export interface OAuthCallbackScreenProps {
   /**
@@ -220,13 +217,13 @@ export const OAuthCallbackScreen: React.FC<OAuthCallbackScreenProps> = ({
         backgroundColor={colors.background.DEFAULT}
         barStyle="dark-content"
       />
-      <StyledSafeAreaView 
+      <SafeAreaView 
         style={{ 
           flex: 1, 
           backgroundColor: colors.background.DEFAULT 
         }}
       >
-        <StyledView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
           {processingState === 'loading' && (
             <AuthLoadingState
               loadingType="signing_in"
@@ -253,8 +250,8 @@ export const OAuthCallbackScreen: React.FC<OAuthCallbackScreenProps> = ({
               showProgressDots={true}
             />
           )}
-        </StyledView>
-      </StyledSafeAreaView>
+        </View>
+      </SafeAreaView>
     </>
   );
 };

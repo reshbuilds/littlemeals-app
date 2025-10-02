@@ -20,13 +20,9 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { colors, semanticColors } from '../../constants/colors';
 import { spacing } from '../../constants/spacing';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 // Loading Spinner Props
 export interface LoadingSpinnerProps {
@@ -134,9 +130,9 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   };
 
   return (
-    <StyledView className={`items-center justify-center ${className}`} style={style}>
+    <View className={`items-center justify-center ${className}`} style={style}>
       <ActivityIndicator size={size === 'small' ? 'small' : 'large'} color={color} />
-    </StyledView>
+    </View>
   );
 };
 
@@ -155,19 +151,19 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
   if (!visible) return null;
 
   return (
-    <StyledView
+    <View
       className={`absolute inset-0 items-center justify-center z-50 ${className}`}
       style={[{ backgroundColor }, style]}
     >
-      <StyledView className="bg-background-card p-6 rounded-lg items-center shadow-lg">
+      <View className="bg-background-card p-6 rounded-lg items-center shadow-lg">
         <LoadingSpinner size={size} />
         {message && (
-          <StyledText className="text-foreground-DEFAULT text-base mt-4 text-center">
+          <Text className="text-foreground-DEFAULT text-base mt-4 text-center">
             {message}
-          </StyledText>
+          </Text>
         )}
-      </StyledView>
-    </StyledView>
+      </View>
+    </View>
   );
 };
 
@@ -228,45 +224,45 @@ export const MessageAlert: React.FC<MessageAlertProps> = ({
   const styles = getTypeStyles();
 
   return (
-    <StyledView
+    <View
       className={`border-l-4 p-4 rounded-r-lg ${styles.container} ${className}`}
       style={style}
     >
-      <StyledView className="flex-row items-start">
-        <StyledText className="text-lg mr-3">{styles.icon}</StyledText>
+      <View className="flex-row items-start">
+        <Text className="text-lg mr-3">{styles.icon}</Text>
         
-        <StyledView className="flex-1">
+        <View className="flex-1">
           {title && (
-            <StyledText className={`font-semibold text-base mb-1 ${styles.titleColor}`}>
+            <Text className={`font-semibold text-base mb-1 ${styles.titleColor}`}>
               {title}
-            </StyledText>
+            </Text>
           )}
-          <StyledText className={`text-sm leading-5 ${styles.messageColor}`}>
+          <Text className={`text-sm leading-5 ${styles.messageColor}`}>
             {message}
-          </StyledText>
+          </Text>
           
           {action && (
-            <StyledTouchableOpacity
+            <TouchableOpacity
               onPress={action.onPress}
               className="mt-3 py-2 px-4 bg-primary-DEFAULT rounded-md self-start"
             >
-              <StyledText className="text-primary-foreground font-medium text-sm">
+              <Text className="text-primary-foreground font-medium text-sm">
                 {action.label}
-              </StyledText>
-            </StyledTouchableOpacity>
+              </Text>
+            </TouchableOpacity>
           )}
-        </StyledView>
+        </View>
 
         {dismissible && onDismiss && (
-          <StyledTouchableOpacity
+          <TouchableOpacity
             onPress={onDismiss}
             className="ml-3 p-1"
           >
-            <StyledText className="text-foreground-muted text-lg">×</StyledText>
-          </StyledTouchableOpacity>
+            <Text className="text-foreground-muted text-lg">×</Text>
+          </TouchableOpacity>
         )}
-      </StyledView>
-    </StyledView>
+      </View>
+    </View>
   );
 };
 
@@ -320,7 +316,7 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
   };
 
   return (
-    <StyledView
+    <View
       className={`${isHorizontal ? 'flex-row items-center' : 'flex-col'} ${className}`}
       style={style}
     >
@@ -330,55 +326,55 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
         const isLast = index === steps.length - 1;
 
         return (
-          <StyledView
+          <View
             key={step.id}
             className={`${isHorizontal ? 'flex-row items-center' : 'flex-col items-start'} ${
               isLast ? '' : 'flex-1'
             }`}
           >
             {/* Step Circle */}
-            <StyledView
+            <View
               className={`
                 w-8 h-8 rounded-full border-2 items-center justify-center
                 ${stepStyles.circle}
               `}
             >
               {status === 'completed' ? (
-                <StyledText className="text-white text-sm font-bold">✓</StyledText>
+                <Text className="text-white text-sm font-bold">✓</Text>
               ) : (
-                <StyledText className={`text-sm font-medium ${stepStyles.text}`}>
+                <Text className={`text-sm font-medium ${stepStyles.text}`}>
                   {index + 1}
-                </StyledText>
+                </Text>
               )}
-            </StyledView>
+            </View>
 
             {/* Step Label */}
             {showLabels && (
-              <StyledView className={`${isHorizontal ? 'ml-2' : 'mt-2'} flex-1`}>
-                <StyledText className={`font-medium text-sm ${stepStyles.text}`}>
+              <View className={`${isHorizontal ? 'ml-2' : 'mt-2'} flex-1`}>
+                <Text className={`font-medium text-sm ${stepStyles.text}`}>
                   {step.label}
-                </StyledText>
+                </Text>
                 {step.description && (
-                  <StyledText className="text-foreground-muted text-xs mt-1">
+                  <Text className="text-foreground-muted text-xs mt-1">
                     {step.description}
-                  </StyledText>
+                  </Text>
                 )}
-              </StyledView>
+              </View>
             )}
 
             {/* Connector Line */}
             {!isLast && (
-              <StyledView
+              <View
                 className={`
                   ${isHorizontal ? 'h-0.5 flex-1 mx-4' : 'w-0.5 h-6 ml-4 mt-2'}
                   ${stepStyles.connector}
                 `}
               />
             )}
-          </StyledView>
+          </View>
         );
       })}
-    </StyledView>
+    </View>
   );
 };
 
@@ -479,17 +475,17 @@ export const Toast: React.FC<ToastProps> = ({
         style,
       ]}
     >
-      <StyledView
+      <View
         className={`
           ${typeStyles.bg} px-4 py-3 rounded-lg shadow-lg
           flex-row items-center
         `}
       >
-        <StyledText className="text-lg mr-3">{typeStyles.icon}</StyledText>
-        <StyledText className={`${typeStyles.text} text-sm font-medium flex-1`}>
+        <Text className="text-lg mr-3">{typeStyles.icon}</Text>
+        <Text className={`${typeStyles.text} text-sm font-medium flex-1`}>
           {message}
-        </StyledText>
-      </StyledView>
+        </Text>
+      </View>
     </Animated.View>
   );
 };

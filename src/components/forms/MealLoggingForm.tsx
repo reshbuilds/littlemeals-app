@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { View, Text, TouchableOpacity, Alert, TextInput } from 'react-native';
-import { styled } from 'nativewind';
 import { 
   VStack, 
   HStack, 

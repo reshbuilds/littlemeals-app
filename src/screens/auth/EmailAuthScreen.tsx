@@ -11,7 +11,6 @@ import {
   Platform,
   Dimensions,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { 
   PrimaryButton, 
   SecondaryButton,
@@ -24,10 +23,6 @@ import { colors } from '../../constants/colors';
 import { spacing, dimensions, borderRadius } from '../../constants/spacing';
 import { textStyles, responsiveTextStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTextInput = styled(TextInput);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 // Types and Interfaces
 export type AuthMode = 'signin' | 'signup' | 'forgot-password';
@@ -405,7 +400,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                 }}
               >
                 {/* App Logo */}
-                <StyledView 
+                <View 
                   style={{
                     width: 60,
                     height: 60,
@@ -421,11 +416,11 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                     elevation: 2,
                   }}
                 >
-                  <StyledText style={{ fontSize: 24 }}>🍽️</StyledText>
-                </StyledView>
+                  <Text style={{ fontSize: 24 }}>🍽️</Text>
+                </View>
 
                 {/* Screen Title */}
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.h2,
                     color: colors.foreground.DEFAULT,
@@ -434,10 +429,10 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                   }}
                 >
                   {getScreenTitle()}
-                </StyledText>
+                </Text>
 
                 {/* Screen Subtitle */}
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.bodySmall,
                     color: colors.foreground.muted,
@@ -447,7 +442,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                   }}
                 >
                   {getScreenSubtitle()}
-                </StyledText>
+                </Text>
               </VStack>
 
               {/* Right Side: Form */}
@@ -465,8 +460,8 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                 {/* Form Fields */}
                 <VStack spacing="md">
                   {/* Email Input */}
-                  <StyledView>
-                    <StyledText
+                  <View>
+                    <Text
                       style={{
                         ...textStyles.label,
                         color: colors.foreground.DEFAULT,
@@ -474,8 +469,8 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                       }}
                     >
                       Email Address
-                    </StyledText>
-                    <StyledTextInput
+                    </Text>
+                    <TextInput
                       ref={emailRef}
                       value={email}
                       onChangeText={(text) => {
@@ -504,7 +499,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                       testID="email-input"
                     />
                     {errors.email && (
-                      <StyledText
+                      <Text
                         style={{
                           ...textStyles.caption,
                           color: colors.error.DEFAULT,
@@ -512,14 +507,14 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                         }}
                       >
                         {errors.email}
-                      </StyledText>
+                      </Text>
                     )}
-                  </StyledView>
+                  </View>
 
                   {/* Password Input */}
                   {mode !== 'forgot-password' && (
-                    <StyledView>
-                      <StyledText
+                    <View>
+                      <Text
                         style={{
                           ...textStyles.label,
                           color: colors.foreground.DEFAULT,
@@ -527,9 +522,9 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                         }}
                       >
                         Password
-                      </StyledText>
-                      <StyledView style={{ position: 'relative' }}>
-                        <StyledTextInput
+                      </Text>
+                      <View style={{ position: 'relative' }}>
+                        <TextInput
                           ref={passwordRef}
                           value={password}
                           onChangeText={(text) => {
@@ -564,7 +559,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                           testID="password-input"
                         />
                         
-                        <StyledTouchableOpacity
+                        <TouchableOpacity
                           onPress={() => setShowPassword(!showPassword)}
                           style={{
                             position: 'absolute',
@@ -578,14 +573,14 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                           accessibilityLabel={showPassword ? 'Hide password' : 'Show password'}
                           testID="password-visibility-toggle"
                         >
-                          <StyledText style={{ fontSize: 18 }}>
+                          <Text style={{ fontSize: 18 }}>
                             {showPassword ? '🙈' : '👁️'}
-                          </StyledText>
-                        </StyledTouchableOpacity>
-                      </StyledView>
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
                       
                       {errors.password && (
-                        <StyledText
+                        <Text
                           style={{
                             ...textStyles.caption,
                             color: colors.error.DEFAULT,
@@ -593,15 +588,15 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                           }}
                         >
                           {errors.password}
-                        </StyledText>
+                        </Text>
                       )}
-                    </StyledView>
+                    </View>
                   )}
 
                   {/* Confirm Password Input (only for signup in landscape) */}
                   {mode === 'signup' && (
-                    <StyledView>
-                      <StyledText
+                    <View>
+                      <Text
                         style={{
                           ...textStyles.label,
                           color: colors.foreground.DEFAULT,
@@ -609,8 +604,8 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                         }}
                       >
                         Confirm Password
-                      </StyledText>
-                      <StyledTextInput
+                      </Text>
+                      <TextInput
                         ref={confirmPasswordRef}
                         value={confirmPassword}
                         onChangeText={(text) => {
@@ -639,7 +634,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                       />
                       
                       {errors.confirmPassword && (
-                        <StyledText
+                        <Text
                           style={{
                             ...textStyles.caption,
                             color: colors.error.DEFAULT,
@@ -647,9 +642,9 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                           }}
                         >
                           {errors.confirmPassword}
-                        </StyledText>
+                        </Text>
                       )}
-                    </StyledView>
+                    </View>
                   )}
                 </VStack>
 
@@ -667,7 +662,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
 
                   {/* Forgot Password Link (only in signin mode) */}
                   {mode === 'signin' && (
-                    <StyledTouchableOpacity
+                    <TouchableOpacity
                       onPress={() => switchMode('forgot-password')}
                       disabled={loading}
                       style={{
@@ -677,7 +672,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                       accessibilityLabel="Forgot your password?"
                       testID="forgot-password-link"
                     >
-                      <StyledText
+                      <Text
                         style={{
                           ...textStyles.bodySmall,
                           color: colors.primary.DEFAULT,
@@ -685,14 +680,14 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                         }}
                       >
                         Forgot your password?
-                      </StyledText>
-                    </StyledTouchableOpacity>
+                      </Text>
+                    </TouchableOpacity>
                   )}
 
                   {/* Mode Switch and Back Button */}
                   <VStack spacing="sm" style={{ marginTop: spacing[2] }}>
                     {mode !== 'forgot-password' && (
-                      <StyledTouchableOpacity
+                      <TouchableOpacity
                         onPress={() => switchMode(mode === 'signin' ? 'signup' : 'signin')}
                         disabled={loading}
                         style={{
@@ -701,7 +696,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                         }}
                         testID="mode-switch-link"
                       >
-                        <StyledText
+                        <Text
                           style={{
                             ...textStyles.bodySmall,
                             color: colors.foreground.muted,
@@ -712,16 +707,16 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                             ? "Don't have an account? " 
                             : "Already have an account? "
                           }
-                          <StyledText
+                          <Text
                             style={{
                               color: colors.primary.DEFAULT,
                               fontWeight: textStyles.button.fontWeight,
                             }}
                           >
                             {mode === 'signin' ? 'Create one' : 'Sign in'}
-                          </StyledText>
-                        </StyledText>
-                      </StyledTouchableOpacity>
+                          </Text>
+                        </Text>
+                      </TouchableOpacity>
                     )}
 
                     <SecondaryButton
@@ -742,7 +737,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
               {/* Header Section */}
               <VStack spacing="md" align="center" style={{ paddingTop: spacing[4] }}>
                 {/* App Logo */}
-                <StyledView 
+                <View 
                   style={{
                     width: 80,
                     height: 80,
@@ -758,11 +753,11 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                     elevation: 2,
                   }}
                 >
-                  <StyledText style={{ fontSize: 32 }}>🍽️</StyledText>
-                </StyledView>
+                  <Text style={{ fontSize: 32 }}>🍽️</Text>
+                </View>
 
                 {/* Screen Title */}
-                <StyledText
+                <Text
                   style={{
                     ...responsiveTextStyles.screenTitle,
                     color: colors.foreground.DEFAULT,
@@ -771,10 +766,10 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                   }}
                 >
                   {getScreenTitle()}
-                </StyledText>
+                </Text>
 
                 {/* Screen Subtitle */}
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.body,
                     color: colors.foreground.muted,
@@ -784,7 +779,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                   }}
                 >
                   {getScreenSubtitle()}
-                </StyledText>
+                </Text>
               </VStack>
 
             {/* General Error Message */}
@@ -800,8 +795,8 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
             {/* Form Section */}
             <VStack spacing="lg" style={{ marginTop: spacing[6] }}>
               {/* Email Input */}
-              <StyledView>
-                <StyledText
+              <View>
+                <Text
                   style={{
                     ...textStyles.label,
                     color: colors.foreground.DEFAULT,
@@ -809,8 +804,8 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                   }}
                 >
                   Email Address
-                </StyledText>
-                <StyledTextInput
+                </Text>
+                <TextInput
                   ref={emailRef}
                   value={email}
                   onChangeText={(text) => {
@@ -840,7 +835,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                   testID="email-input"
                 />
                 {errors.email && (
-                  <StyledText
+                  <Text
                     style={{
                       ...textStyles.caption,
                       color: colors.error.DEFAULT,
@@ -848,14 +843,14 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                     }}
                   >
                     {errors.email}
-                  </StyledText>
+                  </Text>
                 )}
-              </StyledView>
+              </View>
 
               {/* Password Input */}
               {mode !== 'forgot-password' && (
-                <StyledView>
-                  <StyledText
+                <View>
+                  <Text
                     style={{
                       ...textStyles.label,
                       color: colors.foreground.DEFAULT,
@@ -863,9 +858,9 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                     }}
                   >
                     Password
-                  </StyledText>
-                  <StyledView style={{ position: 'relative' }}>
-                    <StyledTextInput
+                  </Text>
+                  <View style={{ position: 'relative' }}>
+                    <TextInput
                       ref={passwordRef}
                       value={password}
                       onChangeText={(text) => {
@@ -903,7 +898,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                     />
                     
                     {/* Password Visibility Toggle */}
-                    <StyledTouchableOpacity
+                    <TouchableOpacity
                       onPress={() => setShowPassword(!showPassword)}
                       style={{
                         position: 'absolute',
@@ -918,14 +913,14 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                       accessibilityRole="button"
                       testID="password-visibility-toggle"
                     >
-                      <StyledText style={{ fontSize: 20 }}>
+                      <Text style={{ fontSize: 20 }}>
                         {showPassword ? '🙈' : '👁️'}
-                      </StyledText>
-                    </StyledTouchableOpacity>
-                  </StyledView>
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                   
                   {errors.password && (
-                    <StyledText
+                    <Text
                       style={{
                         ...textStyles.caption,
                         color: colors.error.DEFAULT,
@@ -933,39 +928,39 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                       }}
                     >
                       {errors.password}
-                    </StyledText>
+                    </Text>
                   )}
                   
                   {/* Password Strength Indicator (for signup) */}
                   {mode === 'signup' && password.length > 0 && (
-                    <StyledView style={{ marginTop: spacing[2] }}>
+                    <View style={{ marginTop: spacing[2] }}>
                       <HStack align="center" spacing="sm">
-                        <StyledText
+                        <Text
                           style={{
                             ...textStyles.caption,
                             color: colors.foreground.muted,
                           }}
                         >
                           Password strength:
-                        </StyledText>
-                        <StyledText
+                        </Text>
+                        <Text
                           style={{
                             ...textStyles.captionBold,
                             color: getPasswordStrengthColor(getPasswordStrength(password)),
                           }}
                         >
                           {getPasswordStrength(password).toUpperCase()}
-                        </StyledText>
+                        </Text>
                       </HStack>
-                    </StyledView>
+                    </View>
                   )}
-                </StyledView>
+                </View>
               )}
 
               {/* Confirm Password Input (only for signup) */}
               {mode === 'signup' && (
-                <StyledView>
-                  <StyledText
+                <View>
+                  <Text
                     style={{
                       ...textStyles.label,
                       color: colors.foreground.DEFAULT,
@@ -973,9 +968,9 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                     }}
                   >
                     Confirm Password
-                  </StyledText>
-                  <StyledView style={{ position: 'relative' }}>
-                    <StyledTextInput
+                  </Text>
+                  <View style={{ position: 'relative' }}>
+                    <TextInput
                       ref={confirmPasswordRef}
                       value={confirmPassword}
                       onChangeText={(text) => {
@@ -1007,7 +1002,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                     />
                     
                     {/* Confirm Password Visibility Toggle */}
-                    <StyledTouchableOpacity
+                    <TouchableOpacity
                       onPress={() => setShowConfirmPassword(!showConfirmPassword)}
                       style={{
                         position: 'absolute',
@@ -1022,14 +1017,14 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                       accessibilityRole="button"
                       testID="confirm-password-visibility-toggle"
                     >
-                      <StyledText style={{ fontSize: 20 }}>
+                      <Text style={{ fontSize: 20 }}>
                         {showConfirmPassword ? '🙈' : '👁️'}
-                      </StyledText>
-                    </StyledTouchableOpacity>
-                  </StyledView>
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                   
                   {errors.confirmPassword && (
-                    <StyledText
+                    <Text
                       style={{
                         ...textStyles.caption,
                         color: colors.error.DEFAULT,
@@ -1037,9 +1032,9 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                       }}
                     >
                       {errors.confirmPassword}
-                    </StyledText>
+                    </Text>
                   )}
-                </StyledView>
+                </View>
               )}
             </VStack>
 
@@ -1058,7 +1053,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
 
               {/* Forgot Password Link (only in signin mode) */}
               {mode === 'signin' && (
-                <StyledTouchableOpacity
+                <TouchableOpacity
                   onPress={() => switchMode('forgot-password')}
                   disabled={loading}
                   style={{
@@ -1070,7 +1065,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                   accessibilityRole="button"
                   testID="forgot-password-link"
                 >
-                  <StyledText
+                  <Text
                     style={{
                       ...textStyles.button,
                       color: colors.primary.DEFAULT,
@@ -1078,8 +1073,8 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                     }}
                   >
                     Forgot your password?
-                  </StyledText>
-                </StyledTouchableOpacity>
+                  </Text>
+                </TouchableOpacity>
               )}
             </VStack>
 
@@ -1087,7 +1082,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
             <VStack spacing="md" style={{ marginTop: 'auto', paddingBottom: spacing[4] }}>
               {/* Mode Switch Link */}
               {mode !== 'forgot-password' && (
-                <StyledTouchableOpacity
+                <TouchableOpacity
                   onPress={() => switchMode(mode === 'signin' ? 'signup' : 'signin')}
                   disabled={loading}
                   style={{
@@ -1099,7 +1094,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                   accessibilityRole="button"
                   testID="mode-switch-link"
                 >
-                  <StyledText
+                  <Text
                     style={{
                       ...textStyles.body,
                       color: colors.foreground.muted,
@@ -1110,7 +1105,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                       ? "Don't have an account? " 
                       : "Already have an account? "
                     }
-                    <StyledText
+                    <Text
                       style={{
                         ...textStyles.body,
                         color: colors.primary.DEFAULT,
@@ -1118,9 +1113,9 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                       }}
                     >
                       {mode === 'signin' ? 'Create one' : 'Sign in'}
-                    </StyledText>
-                  </StyledText>
-                </StyledTouchableOpacity>
+                    </Text>
+                  </Text>
+                </TouchableOpacity>
               )}
 
               {/* Back to OAuth Options */}
@@ -1136,7 +1131,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
 
               {/* Terms and Privacy (only for signup) */}
               {mode === 'signup' && (
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.caption,
                     color: colors.foreground.muted,
@@ -1148,7 +1143,7 @@ export const EmailAuthScreen: React.FC<EmailAuthScreenProps> = ({
                   }}
                 >
                   By creating an account, you agree to our Terms of Service and Privacy Policy
-                </StyledText>
+                </Text>
               )}
             </VStack>
           </VStack>

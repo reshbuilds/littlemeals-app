@@ -17,12 +17,9 @@ import {
   GestureResponderEvent,
   AccessibilityRole 
 } from 'react-native';
-import { styled } from 'nativewind';
 import { spacing, type Spacing } from '../../constants/spacing';
 import { colors } from '../../constants/colors';
 
-const StyledView = styled(View);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 // Spacing utility types
 export type SpacingValue = Spacing | 'auto' | 'none';
@@ -276,7 +273,7 @@ export const Box: React.FC<BoxProps> = ({
   };
   
   return (
-    <StyledView
+    <View
       className={baseClassName}
       style={dynamicStyle}
       accessibilityRole={accessibilityRole}
@@ -285,7 +282,7 @@ export const Box: React.FC<BoxProps> = ({
       testID={testID}
     >
       {children}
-    </StyledView>
+    </View>
   );
 };
 
@@ -469,7 +466,7 @@ export const Pressable: React.FC<PressableProps> = ({
   `.trim().replace(/\s+/g, ' ');
   
   return (
-    <StyledTouchableOpacity
+    <TouchableOpacity
       onPress={disabled ? undefined : onPress}
       onPressIn={disabled ? undefined : onPressIn}
       onPressOut={disabled ? undefined : onPressOut}
@@ -486,7 +483,7 @@ export const Pressable: React.FC<PressableProps> = ({
       <Box {...boxProps}>
         {children}
       </Box>
-    </StyledTouchableOpacity>
+    </TouchableOpacity>
   );
 };
 

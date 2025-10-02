@@ -11,12 +11,8 @@
 import React from 'react';
 import { View, ScrollView, ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { styled } from 'nativewind';
 import { spacing, type Spacing } from '../../constants/spacing';
 
-const StyledSafeAreaView = styled(SafeAreaView);
-const StyledScrollView = styled(ScrollView);
-const StyledView = styled(View);
 
 // Screen Component Props
 export interface ScreenProps {
@@ -80,7 +76,7 @@ export const Screen: React.FC<ScreenProps> = ({
   const baseClassName = `flex-1 ${backgroundColor} ${paddingClass} ${className}`.trim();
 
   const content = scrollable ? (
-    <StyledScrollView
+    <ScrollView
       className={baseClassName}
       style={style}
       contentContainerStyle={{ flexGrow: 1 }}
@@ -88,18 +84,18 @@ export const Screen: React.FC<ScreenProps> = ({
       {...props}
     >
       {children}
-    </StyledScrollView>
+    </ScrollView>
   ) : (
-    <StyledView className={baseClassName} style={style}>
+    <View className={baseClassName} style={style}>
       {children}
-    </StyledView>
+    </View>
   );
 
   if (safeArea) {
     return (
-      <StyledSafeAreaView className="flex-1">
+      <SafeAreaView className="flex-1">
         {content}
-      </StyledSafeAreaView>
+      </SafeAreaView>
     );
   }
 
@@ -134,9 +130,9 @@ export const Container: React.FC<ContainerProps> = ({
   const baseClassName = `${getSizeClass()} ${paddingClass} ${centerClass} ${className}`.trim();
 
   return (
-    <StyledView className={baseClassName} style={style}>
+    <View className={baseClassName} style={style}>
       {children}
-    </StyledView>
+    </View>
   );
 };
 
@@ -171,15 +167,15 @@ export const Grid: React.FC<GridProps> = ({
   const baseClassName = `flex-row flex-wrap ${gapClass} ${paddingClass} ${className}`.trim();
 
   const gridChildren = React.Children.map(children, (child, index) => (
-    <StyledView key={index} className={getColumnWidth()}>
+    <View key={index} className={getColumnWidth()}>
       {child}
-    </StyledView>
+    </View>
   ));
 
   return (
-    <StyledView className={baseClassName} style={style}>
+    <View className={baseClassName} style={style}>
       {gridChildren}
-    </StyledView>
+    </View>
   );
 };
 
@@ -238,9 +234,9 @@ export const Stack: React.FC<StackProps> = ({
   `.trim().replace(/\s+/g, ' ');
 
   return (
-    <StyledView className={baseClassName} style={style}>
+    <View className={baseClassName} style={style}>
       {children}
-    </StyledView>
+    </View>
   );
 };
 
@@ -281,7 +277,7 @@ export const Spacer: React.FC<SpacerProps> = ({
 
   const baseClassName = `${getSizeClass()} ${className}`.trim();
 
-  return <StyledView className={baseClassName} style={style} />;
+  return <View className={baseClassName} style={style} />;
 };
 
 /**
@@ -319,5 +315,5 @@ export const Divider: React.FC<DividerProps> = ({
 
   const baseClassName = `${getSizeClass()} ${getThicknessClass()} ${color} ${className}`.trim();
 
-  return <StyledView className={baseClassName} style={style} />;
+  return <View className={baseClassName} style={style} />;
 };

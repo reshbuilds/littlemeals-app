@@ -6,14 +6,10 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { colors } from '../../constants/colors';
 import { spacing, dimensions, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledTouchableOpacity = styled(TouchableOpacity);
-const StyledText = styled(Text);
-const StyledView = styled(View);
 
 export type OAuthProvider = 'google' | 'apple' | 'email';
 
@@ -121,7 +117,7 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
   };
 
   return (
-    <StyledTouchableOpacity
+    <TouchableOpacity
       style={buttonStyles}
       onPress={loading ? undefined : onPress}
       disabled={disabled || loading}
@@ -136,42 +132,42 @@ export const OAuthButton: React.FC<OAuthButtonProps> = ({
       activeOpacity={0.8}
     >
       {loading ? (
-        <StyledView className="flex-row items-center">
+        <View className="flex-row items-center">
           <ActivityIndicator
             size="small"
             color={textColor}
             style={{ marginRight: spacing[2] }}
           />
-          <StyledText
+          <Text
             style={{
               ...textStyles.buttonLarge,
               color: textColor,
             }}
           >
             Signing in...
-          </StyledText>
-        </StyledView>
+          </Text>
+        </View>
       ) : (
-        <StyledView className="flex-row items-center">
-          <StyledText
+        <View className="flex-row items-center">
+          <Text
             style={{
               fontSize: 20,
               marginRight: spacing[3],
             }}
           >
             {config.icon}
-          </StyledText>
-          <StyledText
+          </Text>
+          <Text
             style={{
               ...textStyles.buttonLarge,
               color: textColor,
             }}
           >
             {config.label}
-          </StyledText>
-        </StyledView>
+          </Text>
+        </View>
       )}
-    </StyledTouchableOpacity>
+    </TouchableOpacity>
   );
 };
 

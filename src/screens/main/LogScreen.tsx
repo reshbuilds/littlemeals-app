@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Alert, TextInput, Platform, Modal, KeyboardAvoidingView } from 'react-native';
-import { styled } from 'nativewind';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { FoodAutocomplete } from '../../components/forms/FoodAutocomplete';
 
@@ -20,12 +19,6 @@ interface ChildResponse {
   response: ResponseType;
 }
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledScrollView = styled(ScrollView);
-const StyledTouchableOpacity = styled(TouchableOpacity);
-const StyledTextInput = styled(TextInput);
-const StyledKeyboardAvoidingView = styled(KeyboardAvoidingView);
 
 const LogScreen = () => {
   const scrollViewRef = useRef<ScrollView>(null);
@@ -133,12 +126,12 @@ const LogScreen = () => {
   };
 
   return (
-    <StyledKeyboardAvoidingView 
+    <KeyboardAvoidingView 
       className="flex-1 bg-background" 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
     >
-      <StyledScrollView 
+      <ScrollView 
         ref={scrollViewRef}
         className="flex-1" 
         showsVerticalScrollIndicator={false}
@@ -146,27 +139,27 @@ const LogScreen = () => {
         keyboardDismissMode="interactive"
         contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
       >
-        <StyledView className="px-6 pt-16 pb-8">
+        <View className="px-6 pt-16 pb-8">
           
           {/* Clean Header */}
-          <StyledView className="mb-8">
-            <StyledView className="flex-row items-start justify-between">
-              <StyledView className="flex-1">
-                <StyledText className="text-3xl font-light text-foreground mb-6">New Meal</StyledText>
+          <View className="mb-8">
+            <View className="flex-row items-start justify-between">
+              <View className="flex-1">
+                <Text className="text-3xl font-light text-foreground mb-6">New Meal</Text>
                 
                 {/* Subtle Date Field - Left Aligned */}
-                <StyledTouchableOpacity 
+                <TouchableOpacity 
                   onPress={openDatePicker}
                   className="self-start"
                 >
-                  <StyledText className="text-base text-foreground-muted">
+                  <Text className="text-base text-foreground-muted">
                     {formatDisplayDate(selectedDate)}
-                  </StyledText>
-                </StyledTouchableOpacity>
-              </StyledView>
+                  </Text>
+                </TouchableOpacity>
+              </View>
               
               {/* Clear Button - Always visible */}
-              <StyledTouchableOpacity 
+              <TouchableOpacity 
                 onPress={() => {
                   Alert.alert('Clear Form', 'Clear all entries?', [
                     { text: 'Cancel', style: 'cancel' },
@@ -175,16 +168,16 @@ const LogScreen = () => {
                 }}
                 className="px-3 py-1 items-center justify-center"
               >
-                <StyledText className="text-foreground-muted text-sm">Clear</StyledText>
-              </StyledTouchableOpacity>
-            </StyledView>
-          </StyledView>
+                <Text className="text-foreground-muted text-sm">Clear</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
           {/* Meal Type - Single Line Pills */}
-          <StyledView className="mb-8">
-            <StyledView className="flex-row justify-between">
+          <View className="mb-8">
+            <View className="flex-row justify-between">
               {mockMealTypes.map((mealType) => (
-                <StyledTouchableOpacity
+                <TouchableOpacity
                   key={mealType}
                   onPress={() => setSelectedMealType(mealType)}
                   className={`px-2 py-2 rounded-full flex-1 mx-1 items-center ${
@@ -193,7 +186,7 @@ const LogScreen = () => {
                       : 'bg-background-secondary'
                   }`}
                 >
-                  <StyledText 
+                  <Text 
                     className={`font-medium text-sm ${
                       selectedMealType === mealType ? 'text-primary-foreground' : 'text-foreground'
                     }`}
@@ -201,36 +194,36 @@ const LogScreen = () => {
                     adjustsFontSizeToFit
                   >
                     {mealType}
-                  </StyledText>
-                </StyledTouchableOpacity>
+                  </Text>
+                </TouchableOpacity>
               ))}
-            </StyledView>
-          </StyledView>
+            </View>
+          </View>
 
           {/* Food Input - With Autocomplete */}
-          <StyledView className="mb-8" style={{ zIndex: 1000 }}>
+          <View className="mb-8" style={{ zIndex: 1000 }}>
             <FoodAutocomplete
               placeholder="Enter food"
               value={foodName}
               onChangeText={setFoodName}
             />
-          </StyledView>
+          </View>
 
           {/* Child Responses - Clean Grid */}
-          <StyledView className="mb-8 space-y-6">
+          <View className="mb-8 space-y-6">
             {mockChildren.map((child) => {
               const childResponse = childResponses.find(cr => cr.childId === child.id);
               
               return (
-                <StyledView key={child.id} className="space-y-3">
-                  <StyledView className="flex-row items-center justify-between">
-                    <StyledView>
-                      <StyledText className="text-lg font-medium text-foreground">{child.name}</StyledText>
-                      <StyledText className="text-sm text-foreground-muted">{child.age} years</StyledText>
-                    </StyledView>
+                <View key={child.id} className="space-y-3">
+                  <View className="flex-row items-center justify-between">
+                    <View>
+                      <Text className="text-lg font-medium text-foreground">{child.name}</Text>
+                      <Text className="text-sm text-foreground-muted">{child.age} years</Text>
+                    </View>
                     
-                    <StyledView className="flex-row gap-2">
-                      <StyledTouchableOpacity
+                    <View className="flex-row gap-2">
+                      <TouchableOpacity
                         onPress={() => handleChildResponse(child.id, 'eaten')}
                         className={`w-14 h-14 rounded-full items-center justify-center ${
                           childResponse?.response === 'eaten'
@@ -238,10 +231,10 @@ const LogScreen = () => {
                             : 'bg-background-secondary'
                         }`}
                       >
-                        <StyledText className="text-2xl">✓</StyledText>
-                      </StyledTouchableOpacity>
+                        <Text className="text-2xl">✓</Text>
+                      </TouchableOpacity>
                       
-                      <StyledTouchableOpacity
+                      <TouchableOpacity
                         onPress={() => handleChildResponse(child.id, 'partial')}
                         className={`w-14 h-14 rounded-full items-center justify-center ${
                           childResponse?.response === 'partial'
@@ -249,10 +242,10 @@ const LogScreen = () => {
                             : 'bg-background-secondary'
                         }`}
                       >
-                        <StyledText className="text-lg">◐</StyledText>
-                      </StyledTouchableOpacity>
+                        <Text className="text-lg">◐</Text>
+                      </TouchableOpacity>
                       
-                      <StyledTouchableOpacity
+                      <TouchableOpacity
                         onPress={() => handleChildResponse(child.id, 'refused')}
                         className={`w-14 h-14 rounded-full items-center justify-center ${
                           childResponse?.response === 'refused'
@@ -260,18 +253,18 @@ const LogScreen = () => {
                             : 'bg-background-secondary'
                         }`}
                       >
-                        <StyledText className="text-xl">×</StyledText>
-                      </StyledTouchableOpacity>
-                    </StyledView>
-                  </StyledView>
-                </StyledView>
+                        <Text className="text-xl">×</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
               );
             })}
-          </StyledView>
+          </View>
 
           {/* Notes - Optional */}
-          <StyledView className="mb-8">
-            <StyledTextInput
+          <View className="mb-8">
+            <TextInput
               placeholder="Notes (optional)"
               value={notes}
               onChangeText={setNotes}
@@ -286,20 +279,20 @@ const LogScreen = () => {
               className="bg-background-card border border-border rounded-xl px-6 py-4 text-base text-foreground min-h-[60px]"
               placeholderTextColor="hsl(160, 6%, 50%)"
             />
-          </StyledView>
+          </View>
 
           {/* Save Button - Prominent */}
-          <StyledTouchableOpacity
+          <TouchableOpacity
             onPress={handleSaveMeal}
             className="bg-primary py-4 rounded-xl items-center mb-4"
           >
-            <StyledText className="text-lg font-semibold text-primary-foreground">
+            <Text className="text-lg font-semibold text-primary-foreground">
               Save
-            </StyledText>
-          </StyledTouchableOpacity>
+            </Text>
+          </TouchableOpacity>
 
-        </StyledView>
-      </StyledScrollView>
+        </View>
+      </ScrollView>
       
       {/* Native Date Picker */}
       {showDatePicker && Platform.OS === 'ios' && (
@@ -309,18 +302,18 @@ const LogScreen = () => {
           visible={showDatePicker}
           onRequestClose={closeDatePicker}
         >
-          <StyledView className="flex-1 justify-end bg-black/50">
-            <StyledView className="bg-background rounded-t-3xl pb-4">
-              <StyledView className="flex-row justify-between items-center px-6 py-4 border-b border-border">
-                <StyledTouchableOpacity onPress={closeDatePicker}>
-                  <StyledText className="text-primary text-base">Cancel</StyledText>
-                </StyledTouchableOpacity>
-                <StyledText className="text-lg font-medium text-foreground">Select Date</StyledText>
-                <StyledTouchableOpacity onPress={confirmDateSelection}>
-                  <StyledText className="text-primary text-base font-medium">Done</StyledText>
-                </StyledTouchableOpacity>
-              </StyledView>
-              <StyledView className="px-4 py-2 bg-background items-center">
+          <View className="flex-1 justify-end bg-black/50">
+            <View className="bg-background rounded-t-3xl pb-4">
+              <View className="flex-row justify-between items-center px-6 py-4 border-b border-border">
+                <TouchableOpacity onPress={closeDatePicker}>
+                  <Text className="text-primary text-base">Cancel</Text>
+                </TouchableOpacity>
+                <Text className="text-lg font-medium text-foreground">Select Date</Text>
+                <TouchableOpacity onPress={confirmDateSelection}>
+                  <Text className="text-primary text-base font-medium">Done</Text>
+                </TouchableOpacity>
+              </View>
+              <View className="px-4 py-2 bg-background items-center">
                 <DateTimePicker
                   value={selectedDate}
                   mode="date"
@@ -335,9 +328,9 @@ const LogScreen = () => {
                     width: 320
                   }}
                 />
-              </StyledView>
-            </StyledView>
-          </StyledView>
+              </View>
+            </View>
+          </View>
         </Modal>
       )}
       
@@ -350,7 +343,7 @@ const LogScreen = () => {
           maximumDate={new Date()}
         />
       )}
-    </StyledKeyboardAvoidingView>
+    </KeyboardAvoidingView>
   );
 };
 

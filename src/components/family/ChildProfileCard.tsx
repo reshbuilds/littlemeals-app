@@ -6,15 +6,10 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTextInput = styled(TextInput);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export interface ChildProfile {
   id?: string;
@@ -165,7 +160,7 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
   const displayChild = isEditing ? editedChild : child;
 
   return (
-    <StyledView
+    <View
       style={{
         backgroundColor: colors.background.card,
         borderRadius: borderRadius.base,
@@ -184,7 +179,7 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
       }}
     >
       {/* Child Header */}
-      <StyledView
+      <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
@@ -192,7 +187,7 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
         }}
       >
         {/* Emoji/Avatar */}
-        <StyledTouchableOpacity
+        <TouchableOpacity
           onPress={isEditing ? () => setShowEmojiPicker(!showEmojiPicker) : undefined}
           style={{
             width: 60,
@@ -209,16 +204,16 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
           accessibilityLabel={isEditing ? 'Select emoji for child' : 'Child avatar'}
           accessibilityRole={isEditing ? 'button' : 'image'}
         >
-          <StyledText style={{ fontSize: 24 }}>
+          <Text style={{ fontSize: 24 }}>
             {displayChild?.emoji || '👶'}
-          </StyledText>
-        </StyledTouchableOpacity>
+          </Text>
+        </TouchableOpacity>
 
         {/* Name */}
-        <StyledView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
           {isEditing ? (
-            <StyledView>
-              <StyledTextInput
+            <View>
+              <TextInput
                 value={editedChild.name}
                 onChangeText={handleNameChange}
                 placeholder="Child's name"
@@ -235,7 +230,7 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
                 testID="child-name-input"
               />
               {errors.name && (
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.caption,
                     color: colors.error.DEFAULT,
@@ -243,24 +238,24 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
                   }}
                 >
                   {errors.name}
-                </StyledText>
+                </Text>
               )}
-            </StyledView>
+            </View>
           ) : (
-            <StyledText
+            <Text
               style={{
                 ...textStyles.h4,
                 color: colors.foreground.DEFAULT,
               }}
             >
               {displayChild?.name || 'New Child'}
-            </StyledText>
+            </Text>
           )}
-        </StyledView>
+        </View>
 
         {/* Action Button */}
         {!isEditing && !disabled && (
-          <StyledTouchableOpacity
+          <TouchableOpacity
             onPress={onEdit}
             style={{
               padding: spacing[2],
@@ -268,14 +263,14 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
             accessibilityLabel="Edit child profile"
             accessibilityRole="button"
           >
-            <StyledText style={{ fontSize: 18 }}>✏️</StyledText>
-          </StyledTouchableOpacity>
+            <Text style={{ fontSize: 18 }}>✏️</Text>
+          </TouchableOpacity>
         )}
-      </StyledView>
+      </View>
 
       {/* Emoji Picker */}
       {showEmojiPicker && isEditing && (
-        <StyledView
+        <View
           style={{
             backgroundColor: colors.background.secondary,
             borderRadius: borderRadius.base,
@@ -287,7 +282,7 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
           }}
         >
           {childEmojis.map((emoji) => (
-            <StyledTouchableOpacity
+            <TouchableOpacity
               key={emoji}
               onPress={() => handleEmojiSelect(emoji)}
               style={{
@@ -303,16 +298,16 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
               accessibilityLabel={`Select ${emoji} emoji`}
               accessibilityRole="button"
             >
-              <StyledText style={{ fontSize: 20 }}>{emoji}</StyledText>
-            </StyledTouchableOpacity>
+              <Text style={{ fontSize: 20 }}>{emoji}</Text>
+            </TouchableOpacity>
           ))}
-        </StyledView>
+        </View>
       )}
 
       {/* Notes/Additional Info */}
       {isEditing && (
-        <StyledView style={{ marginBottom: spacing[4] }}>
-          <StyledText
+        <View style={{ marginBottom: spacing[4] }}>
+          <Text
             style={{
               ...textStyles.label,
               color: colors.foreground.muted,
@@ -320,8 +315,8 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
             }}
           >
             Notes (optional)
-          </StyledText>
-          <StyledTextInput
+          </Text>
+          <TextInput
             value={editedChild.notes || ''}
             onChangeText={handleNotesChange}
             placeholder="Any allergies, preferences, or notes..."
@@ -342,19 +337,19 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
             accessibilityLabel="Enter notes about child"
             testID="child-notes-input"
           />
-        </StyledView>
+        </View>
       )}
 
       {/* Action Buttons for Editing */}
       {isEditing && (
-        <StyledView
+        <View
           style={{
             flexDirection: 'row',
             gap: spacing[3],
           }}
         >
-          <StyledView style={{ flex: 1 }}>
-            <StyledTouchableOpacity
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity
               onPress={handleCancel}
               disabled={loading}
               style={{
@@ -369,18 +364,18 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
               accessibilityLabel="Cancel editing"
               accessibilityRole="button"
             >
-              <StyledText
+              <Text
                 style={{
                   ...textStyles.button,
                   color: colors.foreground.muted,
                 }}
               >
                 Cancel
-              </StyledText>
-            </StyledTouchableOpacity>
-          </StyledView>
-          <StyledView style={{ flex: 1 }}>
-            <StyledTouchableOpacity
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity
               onPress={handleSave}
               disabled={loading || !editedChild.name.trim()}
               style={{
@@ -394,23 +389,23 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
               accessibilityLabel="Save child profile"
               accessibilityRole="button"
             >
-              <StyledText
+              <Text
                 style={{
                   ...textStyles.button,
                   color: colors.primary.foreground,
                 }}
               >
                 {loading ? 'Saving...' : 'Save'}
-              </StyledText>
-            </StyledTouchableOpacity>
-          </StyledView>
-        </StyledView>
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       )}
 
       {/* Delete Button for Existing Children (only when not editing) */}
       {!isEditing && !isNew && child?.id && (
-        <StyledView style={{ marginTop: spacing[3] }}>
-          <StyledTouchableOpacity
+        <View style={{ marginTop: spacing[3] }}>
+          <TouchableOpacity
             onPress={handleDelete}
             disabled={disabled}
             style={{
@@ -420,17 +415,17 @@ export const ChildProfileCard: React.FC<ChildProfileCardProps> = ({
             accessibilityLabel="Delete child profile"
             accessibilityRole="button"
           >
-            <StyledText
+            <Text
               style={{
                 ...textStyles.caption,
                 color: colors.error.DEFAULT,
               }}
             >
               Remove from family
-            </StyledText>
-          </StyledTouchableOpacity>
-        </StyledView>
+            </Text>
+          </TouchableOpacity>
+        </View>
       )}
-    </StyledView>
+    </View>
   );
 };

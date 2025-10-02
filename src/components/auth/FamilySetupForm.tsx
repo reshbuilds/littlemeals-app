@@ -6,16 +6,11 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { PrimaryButton, SecondaryButton } from '../design-system/Button';
 import { colors } from '../../constants/colors';
 import { spacing, borderRadius } from '../../constants/spacing';
 import { textStyles } from '../../constants/typography';
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTextInput = styled(TextInput);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export interface FamilySetupFormProps {
   /**
@@ -108,10 +103,10 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
   };
 
   return (
-    <StyledView style={{ flex: 1, paddingHorizontal: isLandscape ? spacing[2] : spacing[4] }}>
+    <View style={{ flex: 1, paddingHorizontal: isLandscape ? spacing[2] : spacing[4] }}>
       {/* Header */}
-      <StyledView style={{ marginBottom: isLandscape ? spacing[4] : spacing[6] }}>
-        <StyledText
+      <View style={{ marginBottom: isLandscape ? spacing[4] : spacing[6] }}>
+        <Text
           style={{
             ...(isLandscape ? textStyles.h3 : textStyles.h2),
             color: colors.foreground.DEFAULT,
@@ -120,8 +115,8 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
           }}
         >
           Set up your family
-        </StyledText>
-        <StyledText
+        </Text>
+        <Text
           style={{
             ...(isLandscape ? textStyles.bodySmall : textStyles.body),
             color: colors.foreground.muted,
@@ -131,12 +126,12 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
           }}
         >
           Tell us about your family so we can personalize your meal tracking experience
-        </StyledText>
-      </StyledView>
+        </Text>
+      </View>
 
       {/* Form Content - Use landscape layout if needed */}
       {isLandscape ? (
-        <StyledView 
+        <View 
           style={{
             flexDirection: 'row',
             gap: spacing[4],
@@ -144,9 +139,9 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
           }}
         >
           {/* Left Column - Family Name */}
-          <StyledView style={{ flex: 1 }}>
-            <StyledView style={{ marginBottom: spacing[4] }}>
-              <StyledText
+          <View style={{ flex: 1 }}>
+            <View style={{ marginBottom: spacing[4] }}>
+              <Text
                 style={{
                   ...textStyles.label,
                   color: colors.foreground.DEFAULT,
@@ -154,8 +149,8 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                 }}
               >
                 Family Name
-              </StyledText>
-              <StyledTextInput
+              </Text>
+              <TextInput
                 value={familyName}
                 onChangeText={(text) => {
                   setFamilyName(text);
@@ -180,7 +175,7 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                 testID="family-name-input"
               />
               {errors.familyName && (
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.caption,
                     color: colors.error.DEFAULT,
@@ -188,15 +183,15 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                   }}
                 >
                   {errors.familyName}
-                </StyledText>
+                </Text>
               )}
-            </StyledView>
-          </StyledView>
+            </View>
+          </View>
 
           {/* Right Column - Children Names */}
-          <StyledView style={{ flex: 1 }}>
-            <StyledView style={{ marginBottom: spacing[4] }}>
-              <StyledView
+          <View style={{ flex: 1 }}>
+            <View style={{ marginBottom: spacing[4] }}>
+              <View
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
@@ -204,16 +199,16 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                   marginBottom: spacing[2],
                 }}
               >
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.label,
                     color: colors.foreground.DEFAULT,
                   }}
                 >
                   Children's Names
-                </StyledText>
+                </Text>
                 {childrenNames.length < 6 && (
-                  <StyledTouchableOpacity
+                  <TouchableOpacity
                     onPress={addChildInput}
                     style={{
                       paddingHorizontal: spacing[2],
@@ -222,22 +217,22 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                     accessibilityLabel="Add another child"
                     accessibilityRole="button"
                   >
-                    <StyledText
+                    <Text
                       style={{
                         ...textStyles.buttonSmall,
                         color: colors.primary.DEFAULT,
                       }}
                     >
                       + Add Child
-                    </StyledText>
-                  </StyledTouchableOpacity>
+                    </Text>
+                  </TouchableOpacity>
                 )}
-              </StyledView>
+              </View>
 
               {/* Child Name Inputs - Compact for landscape */}
-              <StyledView style={{ gap: spacing[2] }}>
+              <View style={{ gap: spacing[2] }}>
                 {childrenNames.map((name, index) => (
-                  <StyledView
+                  <View
                     key={index}
                     style={{
                       flexDirection: 'row',
@@ -245,7 +240,7 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                       gap: spacing[2],
                     }}
                   >
-                    <StyledTextInput
+                    <TextInput
                       value={name}
                       onChangeText={(text) => updateChildName(index, text)}
                       placeholder={`Child ${index + 1} name`}
@@ -265,7 +260,7 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                       testID={`child-name-input-${index}`}
                     />
                     {childrenNames.length > 1 && (
-                      <StyledTouchableOpacity
+                      <TouchableOpacity
                         onPress={() => removeChildInput(index)}
                         style={{
                           width: 32,
@@ -276,22 +271,22 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                         accessibilityLabel="Remove this child"
                         accessibilityRole="button"
                       >
-                        <StyledText
+                        <Text
                           style={{
                             fontSize: 18,
                             color: colors.error.DEFAULT,
                           }}
                         >
                           ×
-                        </StyledText>
-                      </StyledTouchableOpacity>
+                        </Text>
+                      </TouchableOpacity>
                     )}
-                  </StyledView>
+                  </View>
                 ))}
-              </StyledView>
+              </View>
 
               {errors.children && (
-                <StyledText
+                <Text
                   style={{
                     ...textStyles.caption,
                     color: colors.error.DEFAULT,
@@ -299,17 +294,17 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                   }}
                 >
                   {errors.children}
-                </StyledText>
+                </Text>
               )}
-            </StyledView>
-          </StyledView>
-        </StyledView>
+            </View>
+          </View>
+        </View>
       ) : (
         <>
           {/* Portrait Layout - Original */}
           {/* Family Name Input */}
-          <StyledView style={{ marginBottom: spacing[5] }}>
-            <StyledText
+          <View style={{ marginBottom: spacing[5] }}>
+            <Text
               style={{
                 ...textStyles.label,
                 color: colors.foreground.DEFAULT,
@@ -317,8 +312,8 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
               }}
             >
               Family Name
-            </StyledText>
-            <StyledTextInput
+            </Text>
+            <TextInput
               value={familyName}
               onChangeText={(text) => {
                 setFamilyName(text);
@@ -343,7 +338,7 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
               testID="family-name-input"
             />
             {errors.familyName && (
-              <StyledText
+              <Text
                 style={{
                   ...textStyles.caption,
                   color: colors.error.DEFAULT,
@@ -351,13 +346,13 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                 }}
               >
                 {errors.familyName}
-              </StyledText>
+              </Text>
             )}
-          </StyledView>
+          </View>
 
           {/* Children Names Section */}
-          <StyledView style={{ marginBottom: spacing[6] }}>
-            <StyledView
+          <View style={{ marginBottom: spacing[6] }}>
+            <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
@@ -365,16 +360,16 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                 marginBottom: spacing[3],
               }}
             >
-              <StyledText
+              <Text
                 style={{
                   ...textStyles.label,
                   color: colors.foreground.DEFAULT,
                 }}
               >
                 Children's Names
-              </StyledText>
+              </Text>
               {childrenNames.length < 6 && (
-                <StyledTouchableOpacity
+                <TouchableOpacity
                   onPress={addChildInput}
                   style={{
                     paddingHorizontal: spacing[2],
@@ -383,22 +378,22 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                   accessibilityLabel="Add another child"
                   accessibilityRole="button"
                 >
-                  <StyledText
+                  <Text
                     style={{
                       ...textStyles.buttonSmall,
                       color: colors.primary.DEFAULT,
                     }}
                   >
                     + Add Child
-                  </StyledText>
-                </StyledTouchableOpacity>
+                  </Text>
+                </TouchableOpacity>
               )}
-            </StyledView>
+            </View>
 
             {/* Child Name Inputs */}
-            <StyledView style={{ gap: spacing[3] }}>
+            <View style={{ gap: spacing[3] }}>
               {childrenNames.map((name, index) => (
-                <StyledView
+                <View
                   key={index}
                   style={{
                     flexDirection: 'row',
@@ -406,7 +401,7 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                     gap: spacing[2],
                   }}
                 >
-                  <StyledTextInput
+                  <TextInput
                     value={name}
                     onChangeText={(text) => updateChildName(index, text)}
                     placeholder={`Child ${index + 1} name`}
@@ -426,7 +421,7 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                     testID={`child-name-input-${index}`}
                   />
                   {childrenNames.length > 1 && (
-                    <StyledTouchableOpacity
+                    <TouchableOpacity
                       onPress={() => removeChildInput(index)}
                       style={{
                         width: 40,
@@ -437,22 +432,22 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                       accessibilityLabel="Remove this child"
                       accessibilityRole="button"
                     >
-                      <StyledText
+                      <Text
                         style={{
                           fontSize: 20,
                           color: colors.error.DEFAULT,
                         }}
                       >
                         ×
-                      </StyledText>
-                    </StyledTouchableOpacity>
+                      </Text>
+                    </TouchableOpacity>
                   )}
-                </StyledView>
+                </View>
               ))}
-            </StyledView>
+            </View>
 
             {errors.children && (
-              <StyledText
+              <Text
                 style={{
                   ...textStyles.caption,
                   color: colors.error.DEFAULT,
@@ -460,14 +455,14 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
                 }}
               >
                 {errors.children}
-              </StyledText>
+              </Text>
             )}
-          </StyledView>
+          </View>
         </>
       )}
 
       {/* Action Buttons - Responsive for landscape */}
-      <StyledView 
+      <View 
         style={{ 
           gap: isLandscape ? spacing[2] : spacing[3], 
           marginTop: 'auto', 
@@ -497,7 +492,7 @@ export const FamilySetupForm: React.FC<FamilySetupFormProps> = ({
         >
           Join Existing Family Instead
         </SecondaryButton>
-      </StyledView>
-    </StyledView>
+      </View>
+    </View>
   );
 };

@@ -8,18 +8,12 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { ChildProfileCard, ChildProfile } from '../../components/family/ChildProfileCard';
 import { PrimaryButton } from '../../components/design-system/Button';
 import { colors } from '../../constants/colors';
 import { spacing } from '../../constants/spacing';
 import { textStyles, responsiveTextStyles } from '../../constants/typography';
 
-const StyledSafeAreaView = styled(SafeAreaView);
-const StyledScrollView = styled(ScrollView);
-const StyledView = styled(View);
-const StyledText = styled(Text);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export interface ChildManagementScreenProps {
   /**
@@ -159,13 +153,13 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
         backgroundColor={colors.background.DEFAULT}
         barStyle="dark-content"
       />
-      <StyledSafeAreaView 
+      <SafeAreaView 
         style={{ 
           flex: 1, 
           backgroundColor: colors.background.DEFAULT 
         }}
       >
-        <StyledScrollView
+        <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
             paddingHorizontal: spacing[4],
@@ -175,8 +169,8 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
           keyboardShouldPersistTaps="handled"
         >
           {/* Header */}
-          <StyledView style={{ marginBottom: spacing[6] }}>
-            <StyledText
+          <View style={{ marginBottom: spacing[6] }}>
+            <Text
               style={{
                 ...responsiveTextStyles.screenTitle,
                 color: colors.foreground.DEFAULT,
@@ -185,8 +179,8 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
               }}
             >
               Manage Children
-            </StyledText>
-            <StyledText
+            </Text>
+            <Text
               style={{
                 ...textStyles.body,
                 color: colors.foreground.muted,
@@ -194,11 +188,11 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
               }}
             >
               Add and manage your children's profiles for meal tracking
-            </StyledText>
-          </StyledView>
+            </Text>
+          </View>
 
           {/* Children List */}
-          <StyledView style={{ marginBottom: spacing[6], gap: spacing[4] }}>
+          <View style={{ marginBottom: spacing[6], gap: spacing[4] }}>
             {children.map((child) => (
               <ChildProfileCard
                 key={child.id}
@@ -223,12 +217,12 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
                 loading={loading}
               />
             )}
-          </StyledView>
+          </View>
 
           {/* Add Child Button */}
           {!hasAnyEditing && (
-            <StyledView style={{ marginBottom: spacing[6] }}>
-              <StyledTouchableOpacity
+            <View style={{ marginBottom: spacing[6] }}>
+              <TouchableOpacity
                 onPress={handleAddNewChild}
                 style={{
                   backgroundColor: colors.background.card,
@@ -245,8 +239,8 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
                 accessibilityRole="button"
                 testID="add-child-button"
               >
-                <StyledText style={{ fontSize: 32, marginBottom: spacing[2] }}>➕</StyledText>
-                <StyledText
+                <Text style={{ fontSize: 32, marginBottom: spacing[2] }}>➕</Text>
+                <Text
                   style={{
                     ...textStyles.h4,
                     color: colors.primary.DEFAULT,
@@ -254,8 +248,8 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
                   }}
                 >
                   Add Another Child
-                </StyledText>
-                <StyledText
+                </Text>
+                <Text
                   style={{
                     ...textStyles.body,
                     color: colors.foreground.muted,
@@ -264,14 +258,14 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
                   }}
                 >
                   Tap to add a new child to your family
-                </StyledText>
-              </StyledTouchableOpacity>
-            </StyledView>
+                </Text>
+              </TouchableOpacity>
+            </View>
           )}
 
           {/* Empty State */}
           {children.length === 0 && !isAddingChild && (
-            <StyledView
+            <View
               style={{
                 flex: 1,
                 justifyContent: 'center',
@@ -279,8 +273,8 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
                 paddingVertical: spacing[8],
               }}
             >
-              <StyledText style={{ fontSize: 64, marginBottom: spacing[4] }}>👶</StyledText>
-              <StyledText
+              <Text style={{ fontSize: 64, marginBottom: spacing[4] }}>👶</Text>
+              <Text
                 style={{
                   ...textStyles.h3,
                   color: colors.foreground.DEFAULT,
@@ -289,8 +283,8 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
                 }}
               >
                 No Children Added Yet
-              </StyledText>
-              <StyledText
+              </Text>
+              <Text
                 style={{
                   ...textStyles.body,
                   color: colors.foreground.muted,
@@ -300,7 +294,7 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
                 }}
               >
                 Add your children's profiles to start tracking their meals and eating patterns
-              </StyledText>
+              </Text>
               <PrimaryButton
                 onPress={handleAddNewChild}
                 size="large"
@@ -308,12 +302,12 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
               >
                 Add Your First Child
               </PrimaryButton>
-            </StyledView>
+            </View>
           )}
 
           {/* Action Buttons */}
           {!hasAnyEditing && children.length > 0 && (
-            <StyledView style={{ marginTop: 'auto', paddingBottom: spacing[4] }}>
+            <View style={{ marginTop: 'auto', paddingBottom: spacing[4] }}>
               <PrimaryButton
                 onPress={handleComplete}
                 fullWidth
@@ -324,7 +318,7 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
               </PrimaryButton>
               
               {onBack && (
-                <StyledTouchableOpacity
+                <TouchableOpacity
                   onPress={onBack}
                   style={{
                     alignItems: 'center',
@@ -333,20 +327,20 @@ export const ChildManagementScreen: React.FC<ChildManagementScreenProps> = ({
                   accessibilityLabel="Go back"
                   accessibilityRole="button"
                 >
-                  <StyledText
+                  <Text
                     style={{
                       ...textStyles.body,
                       color: colors.foreground.muted,
                     }}
                   >
                     ← Back
-                  </StyledText>
-                </StyledTouchableOpacity>
+                  </Text>
+                </TouchableOpacity>
               )}
-            </StyledView>
+            </View>
           )}
-        </StyledScrollView>
-      </StyledSafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 };

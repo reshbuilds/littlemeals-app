@@ -7,14 +7,10 @@ import {
   Alert,
   Dimensions,
 } from 'react-native';
-import { styled } from 'nativewind';
 import { FamilySetupForm } from '../../components/auth/FamilySetupForm';
 import { colors } from '../../constants/colors';
 import { spacing } from '../../constants/spacing';
 
-const StyledSafeAreaView = styled(SafeAreaView);
-const StyledScrollView = styled(ScrollView);
-const StyledView = styled(View);
 
 export interface FamilySetupScreenProps {
   /**
@@ -89,13 +85,13 @@ export const FamilySetupScreen: React.FC<FamilySetupScreenProps> = ({
         backgroundColor={colors.background.DEFAULT}
         barStyle="dark-content"
       />
-      <StyledSafeAreaView 
+      <SafeAreaView 
         style={{ 
           flex: 1, 
           backgroundColor: colors.background.DEFAULT 
         }}
       >
-        <StyledScrollView
+        <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
             paddingTop: isLandscape ? spacing[2] : spacing[4],
@@ -110,8 +106,8 @@ export const FamilySetupScreen: React.FC<FamilySetupScreenProps> = ({
             loading={loading}
             isLandscape={isLandscape}
           />
-        </StyledScrollView>
-      </StyledSafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 };

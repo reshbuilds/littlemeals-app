@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
-import { styled } from 'nativewind';
 import { AuthNavigator } from './AuthNavigator';
 import { UserData } from '../screens/auth/EmailAuthScreen';
 import { colors } from '../constants/colors';
 
-const StyledView = styled(View);
 
 export type AppState = 'loading' | 'unauthenticated' | 'authenticated';
 
@@ -108,7 +106,7 @@ export const AppFlowCoordinator: React.FC<AppFlowCoordinatorProps> = ({
     switch (flowState.appState) {
       case 'loading':
         return (
-          <StyledView 
+          <View 
             style={{
               flex: 1,
               justifyContent: 'center',
@@ -117,7 +115,7 @@ export const AppFlowCoordinator: React.FC<AppFlowCoordinatorProps> = ({
             }}
           >
             {/* Loading state - could be a splash screen or loading spinner */}
-            <StyledView
+            <View
               style={{
                 width: 120,
                 height: 120,
@@ -132,9 +130,9 @@ export const AppFlowCoordinator: React.FC<AppFlowCoordinatorProps> = ({
                 elevation: 4,
               }}
             >
-              <StyledView style={{ fontSize: 48 }}>🍽️</StyledView>
-            </StyledView>
-          </StyledView>
+              <View style={{ fontSize: 48 }}>🍽️</View>
+            </View>
+          </View>
         );
 
       case 'unauthenticated':
@@ -147,9 +145,9 @@ export const AppFlowCoordinator: React.FC<AppFlowCoordinatorProps> = ({
 
       case 'authenticated':
         return (
-          <StyledView style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
             {children || (
-              <StyledView 
+              <View 
                 style={{
                   flex: 1,
                   justifyContent: 'center',
@@ -158,12 +156,12 @@ export const AppFlowCoordinator: React.FC<AppFlowCoordinatorProps> = ({
                 }}
               >
                 {/* Placeholder for main app - would render the main app tabs/screens */}
-                <StyledView style={{ fontSize: 48, marginBottom: 16 }}>🎉</StyledView>
-                <StyledView>Welcome to LittleMeals!</StyledView>
-                <StyledView>User: {flowState.userData?.name}</StyledView>
-              </StyledView>
+                <View style={{ fontSize: 48, marginBottom: 16 }}>🎉</View>
+                <View>Welcome to LittleMeals!</View>
+                <View>User: {flowState.userData?.name}</View>
+              </View>
             )}
-          </StyledView>
+          </View>
         );
 
       default:

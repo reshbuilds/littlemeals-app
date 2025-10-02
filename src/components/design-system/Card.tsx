@@ -4,10 +4,7 @@ import {
   TouchableOpacity,
   ViewStyle,
 } from 'react-native';
-import { styled } from 'nativewind';
 
-const StyledView = styled(View);
-const StyledTouchableOpacity = styled(TouchableOpacity);
 
 export type CardVariant = 'default' | 'elevated' | 'outlined' | 'flat';
 export type CardSize = 'small' | 'medium' | 'large';
@@ -46,20 +43,20 @@ export const Card: React.FC<CardProps> = ({
 
   if (pressable && onPress) {
     return (
-      <StyledTouchableOpacity
+      <TouchableOpacity
         onPress={onPress}
         className={cardClasses}
         style={style}
       >
         {children}
-      </StyledTouchableOpacity>
+      </TouchableOpacity>
     );
   }
 
   return (
-    <StyledView className={cardClasses} style={style}>
+    <View className={cardClasses} style={style}>
       {children}
-    </StyledView>
+    </View>
   );
 };
 
