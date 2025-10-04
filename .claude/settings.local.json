@@ -12,7 +12,11 @@
       "Bash(lsof:*)",
       "Bash(xargs kill:*)",
       "Bash(npm uninstall:*)",
-      "Bash(xargs sed:*)"
+      "Bash(xargs sed:*)",
+      "Bash(git checkout:*)",
+      "WebSearch",
+      "Bash(git add:*)",
+      "Bash(tree:*)"
     ],
     "deny": []
   }
