@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LittleMeals - Insights Tab Mockup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FBF9F6;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .header h1 {
+            color: #2D5A3D;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .settings-icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #7A9B88;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .timeframe-selector {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .timeframe-btn {
+            padding: 8px 16px;
+            border: 1px solid #E5E1DA;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #68776D;
+        }
+
+        .timeframe-btn.active {
+            background: #2D5A3D;
+            color: white;
+            border-color: #2D5A3D;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2D5A3D;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #F5F3F0;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: #68776D;
+            font-size: 14px;
+        }
+
+        .stat-value {
+            color: #2D5A3D;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .alert-card {
+            background: #FFF4E6;
+            border-left: 4px solid #F59E0B;
+        }
+
+        .success-card {
+            background: #F0FDF4;
+            border-left: 4px solid #10B981;
+        }
+
+        .food-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .food-pill {
+            background: #F5F3F0;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #2D5A3D;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 12px;
+            background: #2D5A3D;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #2D5A3D;
+            border: 1px solid #E5E1DA;
+        }
+
+        .child-card {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border-left: 4px solid #0EA5E9;
+        }
+
+        .insight-pill {
+            background: #FEF3C7;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #92400E;
+            margin-top: 8px;
+            display: flex;
+            align-items: start;
+            gap: 8px;
+        }
+
+        .emoji {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Family Insights</h1>
+        <div class="settings-icon">⚙️</div>
+    </div>
+
+    <div class="timeframe-selector">
+        <button class="timeframe-btn">Weekly</button>
+        <button class="timeframe-btn active">Fortnightly</button>
+        <button class="timeframe-btn">Monthly</button>
+    </div>
+
+    <!-- Rotation Status -->
+    <div class="card success-card">
+        <div class="card-title">🔄 Rotation Status</div>
+        <div class="stat-row">
+            <span class="stat-label">✅ Ready to cook again (2+ weeks old)</span>
+            <span class="stat-value">15 foods</span>
+        </div>
+        <div class="food-list">
+            <div class="food-pill">Pancakes</div>
+            <div class="food-pill">Pasta</div>
+            <div class="food-pill">Chicken</div>
+            <div class="food-pill">+12 more</div>
+        </div>
+        <button class="action-btn">See Full List →</button>
+    </div>
+
+    <!-- Food Jag Alert -->
+    <div class="card alert-card">
+        <div class="card-title">⚠️ Food Jag Alert</div>
+        <div class="stat-row">
+            <span class="stat-label">Broccoli served 4 times this week</span>
+            <span class="stat-value">Risk!</span>
+        </div>
+        <p style="color: #92400E; font-size: 14px; margin-top: 8px;">
+            Kids might get tired of it. Try again in 2 weeks.
+        </p>
+        <button class="action-btn secondary-btn">Got it, remind me later</button>
+    </div>
+
+    <!-- This Fortnight's Wins -->
+    <div class="card">
+        <div class="card-title">🎉 This Fortnight's Wins</div>
+        <div class="stat-row">
+            <span class="stat-label">Top accepted</span>
+            <span class="stat-value">Pancakes (95%)</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Improving</span>
+            <span class="stat-value">Broccoli (34% → 49%)</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Needs work</span>
+            <span class="stat-value">Green beans (25%)</span>
+        </div>
+        <button class="action-btn">Log Pancakes Again →</button>
+    </div>
+
+    <!-- Sam's Stats -->
+    <div class="card child-card">
+        <div class="card-title">👦 Sam (4 years)</div>
+        <div class="stat-row">
+            <span class="stat-label">Different foods tried</span>
+            <span class="stat-value">12 this fortnight</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Acceptance rate</span>
+            <span class="stat-value">8 full ✅ | 3 partial 🟡 | 1 refused ❌</span>
+        </div>
+        <div class="insight-pill">
+            💡 Sam loves carbs when paired with protein
+        </div>
+    </div>
+
+    <!-- Sebbie's Stats -->
+    <div class="card child-card">
+        <div class="card-title">👶 Sebbie (2 years)</div>
+        <div class="stat-row">
+            <span class="stat-label">Different foods tried</span>
+            <span class="stat-value">8 this fortnight</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Acceptance rate</span>
+            <span class="stat-value">10 full ✅ | 2 partial 🟡 | 3 refused ❌</span>
+        </div>
+        <div class="insight-pill">
+            💡 Broccoli + Pasta = Always eats!
+        </div>
+    </div>
+
+    <!-- Smart Patterns -->
+    <div class="card">
+        <div class="card-title">🔍 Smart Patterns</div>
+        <div class="insight-pill">
+            🥦 Broccoli + Pasta = Sam always eats (100%)
+        </div>
+        <div class="insight-pill">
+            🍳 Eggs better at breakfast (90% vs 72% at dinner)
+        </div>
+        <div class="insight-pill">
+            👨 Dad's meals work better for Sebbie (85% vs 70%)
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card">
+        <div class="card-title">⚡ Quick Actions</div>
+        <button class="action-btn">Copy Last Week's Winner</button>
+        <button class="action-btn secondary-btn">Foods to Avoid Next Week</button>
+        <button class="action-btn secondary-btn">Share Summary with Partner</button>
+    </div>
+
+</body>
+</html>
