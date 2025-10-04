@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Alert, TextInput, Platform, Modal, KeyboardAvoidingView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Alert, TextInput, Platform, Modal, KeyboardAvoidingView, Keyboard } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { FoodAutocomplete } from '../../components/forms/FoodAutocomplete';
 
@@ -32,8 +32,9 @@ const LogScreen = () => {
   const [notes, setNotes] = useState('');
 
   const handleChildResponse = (childId: string, response: ResponseType) => {
-    setChildResponses(prev => 
-      prev.map(cr => 
+    Keyboard.dismiss();
+    setChildResponses(prev =>
+      prev.map(cr =>
         cr.childId === childId ? { ...cr, response } : cr
       )
     );
