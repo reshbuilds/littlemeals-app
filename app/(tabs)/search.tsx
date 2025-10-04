@@ -1,6 +1,10 @@
 import React from 'react';
-import SearchScreen from '../../src/screens/main/SearchScreen';
+import { View, Text } from 'react-native';
 
 export default function SearchTab() {
-  return <SearchScreen />;
+  return (
+    <View className="flex-1 items-center justify-center bg-background-default">
+      <Text className="text-text-primary text-lg">Search - Coming Soon</Text>
+    </View>
+  );
 }
