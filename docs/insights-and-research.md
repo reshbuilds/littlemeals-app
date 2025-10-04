@@ -21,3 +21,7 @@
 - The option to see weekly or 2+ weeks ago trends is chosen by the user and can be customized
 - We need to ensure a way to get their preference somewhere without obstructing the flow of the app by making it user-friendly
 - Preference should be easy to set but not intrusive to the main workflow
+
+## Research-Based Insights
+
+- Research shows children's intake should be evaluated over weeks, not days—children naturally self-regulate over 24-hour periods even when individual meals vary wildly
