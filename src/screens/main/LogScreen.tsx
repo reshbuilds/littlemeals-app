@@ -158,19 +158,21 @@ const LogScreen = () => {
                   </Text>
                 </TouchableOpacity>
               </View>
-              
-              {/* Clear Button - Always visible */}
-              <TouchableOpacity 
-                onPress={() => {
-                  Alert.alert('Clear Form', 'Clear all entries?', [
-                    { text: 'Cancel', style: 'cancel' },
-                    { text: 'Clear', style: 'destructive', onPress: resetForm }
-                  ]);
-                }}
-                className="px-3 py-1 items-center justify-center"
-              >
-                <Text className="text-foreground-muted text-sm">Clear</Text>
-              </TouchableOpacity>
+
+              {/* Clear Button - Only show when form has content */}
+              {(foodName.trim() || notes.trim() || childResponses.some(cr => cr.response !== null)) && (
+                <TouchableOpacity
+                  onPress={() => {
+                    Alert.alert('Clear Form', 'Clear all entries?', [
+                      { text: 'Cancel', style: 'cancel' },
+                      { text: 'Clear', style: 'destructive', onPress: resetForm }
+                    ]);
+                  }}
+                  className="px-3 py-1 items-center justify-center"
+                >
+                  <Text className="text-foreground-muted text-sm">Clear</Text>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
 
@@ -202,12 +204,20 @@ const LogScreen = () => {
           </View>
 
           {/* Food Input - With Autocomplete */}
-          <View className="mb-8" style={{ zIndex: 1000 }}>
+          <View className="mb-8 relative" style={{ zIndex: 1000 }}>
             <FoodAutocomplete
               placeholder="Enter food"
               value={foodName}
               onChangeText={setFoodName}
             />
+            {foodName.length > 0 && (
+              <TouchableOpacity
+                onPress={() => setFoodName('')}
+                className="absolute right-4 top-4 w-6 h-6 items-center justify-center bg-background-secondary rounded-full z-10"
+              >
+                <Text className="text-foreground-muted text-sm">×</Text>
+              </TouchableOpacity>
+            )}
           </View>
 
           {/* Child Responses - Clean Grid */}
@@ -220,7 +230,6 @@ const LogScreen = () => {
                   <View className="flex-row items-center justify-between">
                     <View>
                       <Text className="text-lg font-medium text-foreground">{child.name}</Text>
-                      <Text className="text-sm text-foreground-muted">{child.age} years</Text>
                     </View>
                     
                     <View className="flex-row gap-2">
@@ -264,7 +273,7 @@ const LogScreen = () => {
           </View>
 
           {/* Notes - Optional */}
-          <View className="mb-8">
+          <View className="mb-8 relative">
             <TextInput
               placeholder="Notes (optional)"
               value={notes}
@@ -280,6 +289,14 @@ const LogScreen = () => {
               className="bg-background-card border border-border rounded-xl px-6 py-4 text-base text-foreground min-h-[60px]"
               placeholderTextColor="hsl(160, 6%, 50%)"
             />
+            {notes.length > 0 && (
+              <TouchableOpacity
+                onPress={() => setNotes('')}
+                className="absolute right-4 top-4 w-6 h-6 items-center justify-center bg-background-secondary rounded-full"
+              >
+                <Text className="text-foreground-muted text-sm">×</Text>
+              </TouchableOpacity>
+            )}
           </View>
 
           {/* Save Button - Prominent */}
